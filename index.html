@@ -850,7 +850,7 @@ footer .credit a{color:inherit;text-decoration:none;}
 .sec-title .w{display:inline-block;padding:.12em .22em .2em;margin:-.12em -.12em -.2em;
   background:var(--rg-grad);background-size:220% 100%;animation:rgSweep 8s ease-in-out infinite alternate;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-.sec-title-gold .w{background:var(--gold-grad);background-size:220% 100%;}
+.sec-title-gold .w{background-image:var(--gold-grad);}
 
 /* Legibilidad (invitados mayores) */
 body{font-weight:500;font-variant-numeric:lining-nums;}
@@ -2561,7 +2561,7 @@ gsap.fromTo('.rsvp-deadline-jen',{opacity:0,letterSpacing:'1em'},{opacity:1,lett
     gsap.fromTo('.wgal-card img',{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1,stagger:.08,ease:'power3.out',
       scrollTrigger:{trigger:'#sgal',start:'top 75%',once:true}});
     document.querySelectorAll('.gt').forEach(function(f){
-      gsap.fromTo(f.querySelector('.gt-clip'),{clipPath:'circle(0% at 50% 50%)'},{clipPath:'circle(75% at 50% 50%)',duration:1.2,ease:'power3.out',
+      gsap.fromTo(f.querySelector('.gt-clip'),{clipPath:'circle(0% at 50% 50%)'},{clipPath:'circle(100% at 50% 50%)',duration:1.2,ease:'power3.out',clearProps:'clipPath',
         scrollTrigger:{trigger:f,start:'top 88%',once:true}});
       gsap.fromTo(f.querySelector('.gt-clip'),{y:0},{y:+f.dataset.speed,ease:'none',scrollTrigger:{trigger:'.gal-trio',start:'top bottom',end:'bottom top',scrub:true}});
     });
