@@ -1035,7 +1035,7 @@ footer .credit{font-size:13px;color:rgba(58,34,38,.55);}
 .nav-share{width:44px;height:44px;border-radius:50%;border:none;background:transparent;color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .nav-share svg{width:19px;height:19px;}
 .nav-open{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;cursor:pointer;
-  background:var(--rg-grad);background-size:200% 100%;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:15px;letter-spacing:1.5px;}
+  background:var(--rg-grad);background-size:200% 100%;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:15px;letter-spacing:1.5px;white-space:nowrap;}
 @media (min-width:1024px){
   .nav-pill{top:20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transform:translate(-50%,-40px);}
   .nav-pill.on{transform:translate(-50%,0);}
@@ -1046,7 +1046,7 @@ footer .credit{font-size:13px;color:rgba(58,34,38,.55);}
   .nav-pill{bottom:max(1rem,env(safe-area-inset-bottom));background:rgba(255,255,241,.94);}
   .vinyl-btn{bottom:92px !important;right:14px !important;width:62px !important;height:62px !important;}
 }
-.nav-full{position:fixed;inset:0;z-index:950;background:rgba(255,255,241,.97);
+.nav-full{position:fixed;inset:0;z-index:1000;background:rgba(255,255,241,.97);
   clip-path:circle(0% at 85% 95%);visibility:hidden;transition:clip-path .6s cubic-bezier(.2,.7,.2,1),visibility 0s linear .6s;
   display:flex;flex-direction:column;padding:22px 28px max(24px,env(safe-area-inset-bottom));}
 .nav-full.open{clip-path:circle(150% at 85% 95%);visibility:visible;transition:clip-path .6s cubic-bezier(.2,.7,.2,1),visibility 0s;}
@@ -1689,7 +1689,6 @@ footer .credit{font-size:13px;color:rgba(58,34,38,.55);}
           </g>
         </svg>
 
-        <div class="eyebrow eyebrow-silver">Confirma tu Asistencia</div>
         <h2 class="rsvp-title-jen">Tu presencia <em>lo es todo</em></h2>
         <p class="rsvp-text-jen">
           Conf&iacute;rmame tu asistencia antes del<br>
