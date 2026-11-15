@@ -188,7 +188,7 @@ body{
 .xv-num{
   font-family:'Cormorant Garamond',serif;font-weight:400;
   font-size:68px;letter-spacing:12px;line-height:1;
-  background:linear-gradient(135deg,var(--dark) 0%,var(--blush) 45%,var(--dark) 100%);
+  background:var(--rg-grad);background-size:220% 100%;
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   position:relative;display:inline-block;
 }
@@ -846,8 +846,11 @@ footer .credit a{color:inherit;text-decoration:none;}
 /* ════════ PERLA ISSABELA — personalización ════════ */
 @keyframes rgSweep{from{background-position:0% 50%}to{background-position:100% 50%}}
 .sec-title,.sec-title-gold{animation:rgSweep 8s ease-in-out infinite alternate;}
-.sec-title .w{display:inline-block;padding:.12em .2em .18em;margin:-.12em -.1em -.18em;
-  background:inherit;background-size:inherit;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.sec-title.is-split{background:none !important;animation:none !important;-webkit-text-fill-color:transparent;}
+.sec-title .w{display:inline-block;padding:.12em .22em .2em;margin:-.12em -.12em -.2em;
+  background:var(--rg-grad);background-size:220% 100%;animation:rgSweep 8s ease-in-out infinite alternate;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.sec-title-gold .w{background:var(--gold-grad);background-size:220% 100%;}
 
 /* Legibilidad (invitados mayores) */
 body{font-weight:500;font-variant-numeric:lining-nums;}
@@ -2522,7 +2525,7 @@ gsap.fromTo('.rsvp-deadline-jen',{opacity:0,letterSpacing:'1em'},{opacity:1,lett
     document.querySelectorAll('.sec-title').forEach(function(t){
       if(t.dataset.split) return; t.dataset.split = 1;
       t.innerHTML = t.textContent.trim().split(/\s+/).map(function(w){ return '<span class="w">' + w + '</span>'; }).join(' ');
-      t.classList.remove('rv'); gsap.set(t,{opacity:1,y:0});
+      t.classList.remove('rv'); t.classList.add('is-split'); gsap.set(t,{opacity:1,y:0});
       if(RM) return;
       gsap.fromTo(t.querySelectorAll('.w'),{opacity:0,y:26,rotation:-4},{opacity:1,y:0,rotation:0,duration:.9,stagger:.14,ease:'power3.out',
         scrollTrigger:{trigger:t,start:'top 90%',once:true}});
