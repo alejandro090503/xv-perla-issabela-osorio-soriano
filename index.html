@@ -8,7 +8,7 @@
 <meta property="og:title" content="XV A&ntilde;os de Perla Issabela &middot; 6 Febrero 2027">
 <meta property="og:description" content="Acomp&aacute;&ntilde;ame a celebrar este sue&ntilde;o hecho realidad &middot; Ciudad de M&eacute;xico &middot; 6 de Febrero de 2027">
 <meta property="og:url" content="https://xv-perla-issabela-osorio-soriano.vercel.app">
-<meta property="og:image" content="https://xv-perla-issabela-osorio-soriano.vercel.app/og-image.jpg">
+<meta property="og:image" content="https://xv-perla-issabela-osorio-soriano.vercel.app/og-image.jpg?v=2">
 <meta property="og:image:alt" content="XV A&ntilde;os Perla Issabela">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1164,6 +1164,17 @@ footer{padding-bottom:120px !important;}
 
 .on-ink .sec-title,.on-ink .sec-title-gold,.on-ink .intro-firma,.on-ink .gift-store{text-shadow:none !important;filter:drop-shadow(0 0 7px rgba(255,255,241,.95)) !important;}
 .on-ink .rs-guest,.on-ink [style*="background-clip"]{text-shadow:none !important;}
+
+/* Logos de tiendas: silueta real teñida en oro rosado */
+.gift-logo{margin:4px auto 10px;background:var(--foil);background-size:220% 100%;animation:goldSweep 7s ease-in-out infinite;
+  -webkit-mask:var(--lg) center/contain no-repeat;mask:var(--lg) center/contain no-repeat;filter:drop-shadow(0 1px 0 rgba(255,255,255,.6));}
+.gift-logo--lv{--lg:url('liverpool.svg');width:170px;height:40px;}
+.gift-logo--ph{--lg:url('palacio.svg');width:180px;height:54px;}
+/* Velo crema suave detrás de los textos sobre tinta */
+.ink-bg::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 92% 78% at 50% 50%,rgba(255,255,241,.86) 0%,rgba(255,255,241,.74) 40%,rgba(255,255,241,.45) 70%,rgba(255,255,241,0) 100%);}
+.ink-bg i{opacity:.72;}
+@media (prefers-reduced-motion:reduce){.gift-logo{animation:none}}
 /* ════ BLOQUES ════ */
 /* ── DRESS CODE (dc2-) ── */
 #sdc{text-align:center}
@@ -1615,8 +1626,8 @@ footer{padding-bottom:120px !important;}
 
 <!-- ENVELOPE -->
 <div id="envelope-screen" role="button" aria-label="Toca para abrir tu invitacion">
-  <img id="env-image" src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/xv-perla-issabela-osorio-soriano/sobre.png" alt="Invitaci&oacute;n Perla Issabela">
-  <video id="env-video" src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/xv-perla-issabela-osorio-soriano/apertura.mp4" playsinline webkit-playsinline muted preload="auto"></video>
+  <img id="env-image" src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/xv-perla-issabela-osorio-soriano/sobre-pios.jpg" alt="Invitaci&oacute;n Perla Issabela">
+  <video id="env-video" src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/xv-perla-issabela-osorio-soriano/apertura-pios.mp4" playsinline webkit-playsinline muted preload="auto"></video>
   <p class="envelope-hint" id="env-hint">Toca para abrir</p>
 </div>
 <div id="env-flash"></div>
@@ -2159,7 +2170,7 @@ footer{padding-bottom:120px !important;}
     <p class="gift-intro rv">Tambi&eacute;n puedes encontrar mi mesa de regalos en:</p>
     <div class="gift-cards">
       <div class="gift-card sheen-card rv">
-        <div class="gift-store">Liverpool</div>
+        <div class="gift-logo gift-logo--lv" role="img" aria-label="Liverpool"></div>
         <div class="gift-lbl">N&uacute;mero de evento</div>
         <div class="gift-num">60049570</div>
         <div class="gift-btns">
@@ -2168,7 +2179,7 @@ footer{padding-bottom:120px !important;}
         </div>
       </div>
       <div class="gift-card sheen-card rv">
-        <div class="gift-store">El Palacio de Hierro</div>
+        <div class="gift-logo gift-logo--ph" role="img" aria-label="El Palacio de Hierro"></div>
         <div class="gift-lbl">N&uacute;mero de evento</div>
         <div class="gift-num">5003196</div>
         <div class="gift-btns">
