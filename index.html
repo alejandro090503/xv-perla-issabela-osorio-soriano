@@ -95,23 +95,21 @@ body{
 }
 #env-flash{position:fixed;inset:0;background:#fffbf0;z-index:9999;opacity:0;pointer-events:none;}
 .envelope-hint{
-  position:absolute;bottom:52px;left:50%;transform:translateX(-50%);
-  font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:8px;text-transform:uppercase;
-  color:rgba(125,63,74,0.88);opacity:0;cursor:pointer;white-space:nowrap;z-index:10;
-  padding:14px 40px;
-  background:rgba(255,255,255,0.78);
-  border:1px solid rgba(183,110,121,0.35);
-  border-radius:40px;
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  box-shadow:0 6px 28px rgba(212,175,55,0.18);
-  overflow:hidden;
-  animation:hintFloat 3.2s ease-in-out infinite;
+  position:absolute;bottom:56px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;
+  font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:#fffbea;opacity:0;cursor:pointer;white-space:nowrap;z-index:10;padding:15px 30px 15px 22px;min-height:52px;
+  background:linear-gradient(120deg,#8e4a55 0%,#B76E79 38%,#d9a0a8 52%,#B76E79 66%,#8e4a55 100%);background-size:220% 100%;
+  border:1.5px solid rgba(247,231,206,.9);border-radius:999px;
+  box-shadow:0 10px 30px rgba(125,63,74,.38),0 0 0 6px rgba(255,255,241,.35),inset 0 1px 0 rgba(255,255,255,.4);
+  overflow:hidden;animation:hintFloat 3.2s ease-in-out infinite,hintFoil 6s ease-in-out infinite alternate;text-shadow:0 1px 3px rgba(60,20,28,.45);
 }
-.envelope-hint::before{
-  content:'';position:absolute;top:0;left:-130%;width:75%;height:100%;
-  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0.3) 56%,transparent 72%);
-  animation:shimmerSweep 2.8s ease-in-out infinite;pointer-events:none;
-}
+.envelope-hint::before{content:'';width:22px;height:22px;flex:none;background:#F7E7CE;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2c-1 4-5 5-5 9a5 5 0 0 0 10 0c0-4-4-5-5-9z' fill='none' stroke='%23000' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2c-1 4-5 5-5 9a5 5 0 0 0 10 0c0-4-4-5-5-9z' fill='none' stroke='%23000' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  animation:hintPulse 2.2s ease-in-out infinite;}
+.envelope-hint::after{content:'';position:absolute;top:0;left:-130%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);animation:shimmerSweep 3.2s ease-in-out infinite;pointer-events:none;}
+@keyframes hintFoil{from{background-position:0% 0}to{background-position:100% 0}}
+@keyframes hintPulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.18);opacity:1}}
 @keyframes shimmerSweep{0%{left:-130%;}55%{left:200%;}100%{left:200%;}}
 @keyframes hintFloat{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-5px);}}
 
@@ -141,7 +139,7 @@ body{
   align-items:center;background:#2a1018;overflow:hidden;
 }
 .hero-bg{position:absolute;inset:-14% 0;overflow:hidden;}
-.hero-drift{position:absolute;inset:0;background:url('foto-01.jpg') 50% 24%/cover no-repeat;animation:heroDrift 20s ease-in-out infinite alternate;}
+.hero-drift{position:absolute;inset:0;background:url('foto-07.jpg') 62% 40%/cover no-repeat;animation:heroDrift 20s ease-in-out infinite alternate;}
 @keyframes heroDrift{0%{transform:translate(-2%,-1.5%) scale(1.04)}100%{transform:translate(2%,1.5%) scale(1.16)}}
 .hero-veil{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to bottom,rgba(40,14,22,0) 0%,rgba(40,14,22,0) 46%,rgba(46,16,26,.42) 64%,rgba(36,12,20,.8) 100%),
@@ -1292,7 +1290,7 @@ footer{padding-bottom:120px !important;}
 .c3d-ring{position:absolute;left:50%;top:0;width:0;height:0;transform-style:preserve-3d;will-change:transform;}
 .c3d-item{
   position:absolute;left:calc(var(--c3d-w) / -2);top:40px;width:var(--c3d-w);
-  transform:rotateY(calc(var(--i) * 36deg)) translateZ(var(--c3d-r));
+  transform:rotateY(calc(var(--i) * 45.0deg)) translateZ(var(--c3d-r));
   backface-visibility:hidden;-webkit-backface-visibility:hidden;outline:none;
 }
 .c3d-card{
@@ -1670,7 +1668,7 @@ footer{padding-bottom:120px !important;}
       <!-- Fecha bajo el nombre -->
       <div class="hero-date-line" id="hDate">
         <span class="hero-date-bar"></span>
-        <span class="hero-date-text">6 · Febrero · 2027</span>
+        <span class="hero-date-text">06 · Febrero · 2027</span>
         <span class="hero-date-bar"></span>
       </div>
 
@@ -1700,7 +1698,7 @@ footer{padding-bottom:120px !important;}
   <div class="fecha-sec rv">
     <div class="fecha-line">
       <div class="fl-bar"></div>
-      <div class="fecha-txt">6 &middot; Febrero &middot; MMXXVII</div>
+      <div class="fecha-txt">06 &middot; Febrero &middot; 2027</div>
       <div class="fl-bar right"></div>
     </div>
   </div>
@@ -1717,8 +1715,67 @@ footer{padding-bottom:120px !important;}
       <span class="intro-firma">Perla Issabela</span>
     </div>
     <figure class="feat-photo" id="featPhoto">
-      <div class="feat-frame"><img src="foto-07.jpg" alt="Perla Issabela" class="feat-img"></div>
+      <div class="feat-frame"><img src="foto-01.jpg" alt="Perla Issabela" class="feat-img"></div>
     </figure>
+  </section>
+
+  <div class="orn rv">
+    <svg viewBox="0 0 300 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="20" x2="96" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
+      <line x1="0" y1="23" x2="88" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
+      <path d="M96 21.5 Q104 7 116 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
+      <path d="M122 21.5 L126.5 15.5 L131 21.5 L126.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
+      <path d="M150 6 L165 21.5 L150 37 L135 21.5 Z" fill="rgba(183,110,121,0.09)" stroke="#D4AF37" stroke-width="1.05" opacity="0.50"/>
+      <circle cx="150" cy="21.5" r="4.5" fill="rgba(247,231,206,0.22)" stroke="#D4AF37" stroke-width="0.7" opacity="0.58"/>
+      <path d="M169 21.5 L173.5 15.5 L178 21.5 L173.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
+      <path d="M184 21.5 Q196 7 204 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
+      <line x1="204" y1="20" x2="300" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
+      <line x1="212" y1="23" x2="300" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
+    </svg>
+  </div>
+  <!-- FAMILIA -->
+  <section class="on-ink" data-ink="1" id="sfam">
+    <div class="ink-bg ink-bg--top flip ink-d2" aria-hidden="true"><i></i></div>
+    <div class="eyebrow eyebrow-gold rv">Con la Bendici&oacute;n de</div>
+    <h2 class="sec-title rv">Mi Familia</h2>
+    <div class="fam2">
+
+      <div class="fam2-group">
+        <div class="fam2-medallion">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="fam2-role">Mis Padres</div>
+        <div class="fam2-names">
+          <span class="fam-n">Antonio Osorio Granjeno</span>
+          <span class="fam2-amp">&amp;</span>
+          <span class="fam-n">Annabel Soriano Hern&aacute;ndez</span>
+        </div>
+      </div>
+
+      <div class="fam2-divider rv">
+        <svg viewBox="0 0 100 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="13" x2="32" y2="13" stroke="#D4AF37" stroke-width="0.7" opacity="0.32"/>
+          <path d="M32 13 Q38 5 44 13" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.44"/>
+          <path d="M50 4 L57 13 L50 22 L43 13 Z" fill="rgba(212,175,55,0.10)" stroke="#D4AF37" stroke-width="0.9" opacity="0.48"/>
+          <circle cx="50" cy="13" r="3" fill="rgba(247,231,206,0.22)" stroke="#D4AF37" stroke-width="0.6" opacity="0.55"/>
+          <path d="M56 13 Q62 5 68 13" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.44"/>
+          <line x1="68" y1="13" x2="100" y2="13" stroke="#D4AF37" stroke-width="0.7" opacity="0.32"/>
+        </svg>
+      </div>
+
+      <div class="fam2-group" style="border-top:none;">
+        <div class="fam2-medallion" style="background:linear-gradient(135deg,rgba(201,164,108,0.14),rgba(225,225,225,0.26));border-color:rgba(201,164,108,0.32);">
+          <svg viewBox="0 0 24 24" style="stroke:var(--silver)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="fam2-role" style="color:var(--silver)">Mis Padrinos</div>
+        <div class="fam2-names">
+          <span class="fam-n">Brenda Araceli Osorio Granjeno</span>
+          <span class="fam2-amp" style="color:var(--silver)">&amp;</span>
+          <span class="fam-n">Diego Adolfo Arenas Silva</span>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <div class="orn rv">
@@ -1818,7 +1875,7 @@ footer{padding-bottom:120px !important;}
           </div>
           <div class="loc1-label">Misa de XV A&ntilde;os</div>
           <div class="loc1-time">6:00 <span style="font-size:18px;letter-spacing:3px;">PM</span></div>
-          <div class="loc1-addr">Iglesia Carmelitas Descalzos<br><span class="loc1-city">Ciudad de M&eacute;xico</span></div>
+          <div class="loc1-addr">Iglesia Carmelitas Descalzos<br><span class="loc1-city">Fernando Montes de Oca 150, San Miguel Chapultepec I Secci&oacute;n,<br>Miguel Hidalgo, 11850 Ciudad de M&eacute;xico, CDMX</span></div>
           <div class="loc1-hsep"></div>
         </div>
         <div class="loc1-cta">
@@ -1849,28 +1906,6 @@ footer{padding-bottom:120px !important;}
     </div>
   </section>
 
-  <!-- CALENDAR -->
-  <section class="rv cal-c" id="scal">
-    <div class="eyebrow">No lo olvides</div>
-    <h2 class="sec-title">Gu&aacute;rdalo</h2>
-    <p>Agrega el evento a tu calendario para no olvidarlo</p>
-    <a class="btn" id="gcalBtn" href="#" target="_blank">A&ntilde;adir a Google Calendar</a>
-  </section>
-
-  <div class="orn rv">
-    <svg viewBox="0 0 300 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="20" x2="96" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
-      <line x1="0" y1="23" x2="88" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
-      <path d="M96 21.5 Q104 7 116 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
-      <path d="M122 21.5 L126.5 15.5 L131 21.5 L126.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
-      <path d="M150 6 L165 21.5 L150 37 L135 21.5 Z" fill="rgba(183,110,121,0.09)" stroke="#D4AF37" stroke-width="1.05" opacity="0.50"/>
-      <circle cx="150" cy="21.5" r="4.5" fill="rgba(247,231,206,0.22)" stroke="#D4AF37" stroke-width="0.7" opacity="0.58"/>
-      <path d="M169 21.5 L173.5 15.5 L178 21.5 L173.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
-      <path d="M184 21.5 Q196 7 204 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
-      <line x1="204" y1="20" x2="300" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
-      <line x1="212" y1="23" x2="300" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
-    </svg>
-  </div>
 
   <!-- ITINERARIO — Cards con iconos ilustrados -->
   <section class="on-ink" data-ink="1" id="siti">
@@ -1940,7 +1975,7 @@ footer{padding-bottom:120px !important;}
     </div>
 
     <div class="dc2-block rv">
-      <p class="dc2-sub">Colores a evitar</p>
+      <p class="dc2-sub">Tonos reservados para la quincea&ntilde;era</p>
       <div class="dc2-orbs">
         <div class="dc2-orb" style="--c:#ffe3e6;--d:0s">
           <span class="dc2-bob"><span class="dc2-dot"></span></span>
@@ -1962,7 +1997,7 @@ footer{padding-bottom:120px !important;}
       <p class="dc2-pick">A tu elecci&oacute;n</p>
     </div>
 
-    <p class="dc2-note rv">Estos tonos est&aacute;n reservados para la quincea&ntilde;era. &iexcl;Gracias por tu comprensi&oacute;n!</p>
+    <p class="dc2-note rv">&iexcl;Gracias por tu comprensi&oacute;n!</p>
   </section>
 
   <div class="orn rv">
@@ -1980,65 +2015,6 @@ footer{padding-bottom:120px !important;}
     </svg>
   </div>
 
-  <!-- FAMILIA -->
-  <section class="on-ink" data-ink="1" id="sfam">
-    <div class="ink-bg ink-bg--top flip ink-d2" aria-hidden="true"><i></i></div>
-    <div class="eyebrow eyebrow-gold rv">Con la Bendici&oacute;n de</div>
-    <h2 class="sec-title rv">Mi Familia</h2>
-    <div class="fam2">
-
-      <div class="fam2-group">
-        <div class="fam2-medallion">
-          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <div class="fam2-role">Mis Padres</div>
-        <div class="fam2-names">
-          <span class="fam-n">Antonio Osorio Granjeno</span>
-          <span class="fam2-amp">&amp;</span>
-          <span class="fam-n">Annabel Soriano Hern&aacute;ndez</span>
-        </div>
-      </div>
-
-      <div class="fam2-divider rv">
-        <svg viewBox="0 0 100 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="13" x2="32" y2="13" stroke="#D4AF37" stroke-width="0.7" opacity="0.32"/>
-          <path d="M32 13 Q38 5 44 13" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.44"/>
-          <path d="M50 4 L57 13 L50 22 L43 13 Z" fill="rgba(212,175,55,0.10)" stroke="#D4AF37" stroke-width="0.9" opacity="0.48"/>
-          <circle cx="50" cy="13" r="3" fill="rgba(247,231,206,0.22)" stroke="#D4AF37" stroke-width="0.6" opacity="0.55"/>
-          <path d="M56 13 Q62 5 68 13" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.44"/>
-          <line x1="68" y1="13" x2="100" y2="13" stroke="#D4AF37" stroke-width="0.7" opacity="0.32"/>
-        </svg>
-      </div>
-
-      <div class="fam2-group" style="border-top:none;">
-        <div class="fam2-medallion" style="background:linear-gradient(135deg,rgba(201,164,108,0.14),rgba(225,225,225,0.26));border-color:rgba(201,164,108,0.32);">
-          <svg viewBox="0 0 24 24" style="stroke:var(--silver)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="fam2-role" style="color:var(--silver)">Mis Padrinos</div>
-        <div class="fam2-names">
-          <span class="fam-n">Brenda Araceli Osorio Granjeno</span>
-          <span class="fam2-amp" style="color:var(--silver)">&amp;</span>
-          <span class="fam-n">Diego Adolfo Arenas Silva</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="orn rv">
-    <svg viewBox="0 0 300 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="20" x2="96" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
-      <line x1="0" y1="23" x2="88" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
-      <path d="M96 21.5 Q104 7 116 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
-      <path d="M122 21.5 L126.5 15.5 L131 21.5 L126.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
-      <path d="M150 6 L165 21.5 L150 37 L135 21.5 Z" fill="rgba(183,110,121,0.09)" stroke="#D4AF37" stroke-width="1.05" opacity="0.50"/>
-      <circle cx="150" cy="21.5" r="4.5" fill="rgba(247,231,206,0.22)" stroke="#D4AF37" stroke-width="0.7" opacity="0.58"/>
-      <path d="M169 21.5 L173.5 15.5 L178 21.5 L173.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
-      <path d="M184 21.5 Q196 7 204 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
-      <line x1="204" y1="20" x2="300" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
-      <line x1="212" y1="23" x2="300" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
-    </svg>
-  </div>
 
   <!-- GALERIA -->
   <section id="sgal" class="c3d-sec">
@@ -2052,11 +2028,9 @@ footer{padding-bottom:120px !important;}
       <div class="c3d-item" style="--i:2" role="button" tabindex="0" aria-label="Ver foto 3"><div class="c3d-card"><img src="foto-04.jpg" alt="Perla Issabela" style="object-position:60% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-04.jpg" alt="" style="object-position:60% 50%" draggable="false"></div></div></div>
       <div class="c3d-item" style="--i:3" role="button" tabindex="0" aria-label="Ver foto 4"><div class="c3d-card"><img src="foto-05.jpg" alt="Perla Issabela" style="object-position:50% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-05.jpg" alt="" style="object-position:50% 50%" draggable="false"></div></div></div>
       <div class="c3d-item" style="--i:4" role="button" tabindex="0" aria-label="Ver foto 5"><div class="c3d-card"><img src="foto-06.jpg" alt="Perla Issabela" style="object-position:70% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-06.jpg" alt="" style="object-position:70% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:5" role="button" tabindex="0" aria-label="Ver foto 6"><div class="c3d-card"><img src="foto-08.jpg" alt="Perla Issabela" style="object-position:50% 55%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-08.jpg" alt="" style="object-position:50% 55%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:6" role="button" tabindex="0" aria-label="Ver foto 7"><div class="c3d-card"><img src="foto-09.jpg" alt="Perla Issabela" style="object-position:40% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-09.jpg" alt="" style="object-position:40% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:7" role="button" tabindex="0" aria-label="Ver foto 8"><div class="c3d-card"><img src="foto-10.jpg" alt="Perla Issabela" style="object-position:40% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-10.jpg" alt="" style="object-position:40% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:8" role="button" tabindex="0" aria-label="Ver foto 9"><div class="c3d-card"><img src="foto-11.jpg" alt="Perla Issabela" style="object-position:55% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-11.jpg" alt="" style="object-position:55% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:9" role="button" tabindex="0" aria-label="Ver foto 10"><div class="c3d-card"><img src="foto-12.jpg" alt="Perla Issabela" style="object-position:50% 85%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-12.jpg" alt="" style="object-position:50% 85%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:5" role="button" tabindex="0" aria-label="Ver foto 6"><div class="c3d-card"><img src="foto-10.jpg" alt="Perla Issabela" style="object-position:40% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-10.jpg" alt="" style="object-position:40% 50%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:6" role="button" tabindex="0" aria-label="Ver foto 7"><div class="c3d-card"><img src="foto-11.jpg" alt="Perla Issabela" style="object-position:55% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-11.jpg" alt="" style="object-position:55% 50%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:7" role="button" tabindex="0" aria-label="Ver foto 8"><div class="c3d-card"><img src="foto-12.jpg" alt="Perla Issabela" style="object-position:50% 85%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-12.jpg" alt="" style="object-position:50% 85%" draggable="false"></div></div></div>
     </div>
   </div>
   <p class="c3d-hint rv">Desliza para girar &middot; toca una foto</p>
@@ -2088,8 +2062,8 @@ footer{padding-bottom:120px !important;}
   <section id="sadultos">
     <div class="kids-card rv">
       <div class="kids-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 7a3 3 0 0 1-6 0z"/><path d="M12 12v7"/><path d="M8.5 22h7"/><path d="M9.2 5.5h5.6" opacity=".6"/></svg></div>
-      <div class="eyebrow eyebrow-gold">Solo adultos</div>
-      <p class="kids-txt">Con todo el cari&ntilde;o, he decidido que mi celebraci&oacute;n sea exclusiva para adultos. Conf&iacute;o en que esta noche puedas disfrutar conmigo sin preocupaciones. Gracias por tu comprensi&oacute;n.</p>
+      <div class="eyebrow eyebrow-gold">No ni&ntilde;os</div>
+      <p class="kids-txt">Con todo el cari&ntilde;o, he decidido que mi celebraci&oacute;n sea sin ni&ntilde;os. Conf&iacute;o en que esta noche puedas disfrutar conmigo sin preocupaciones. Gracias por tu comprensi&oacute;n.</p>
     </div>
   </section>
 
@@ -2148,7 +2122,7 @@ footer{padding-bottom:120px !important;}
               <circle cx="30" cy="30" r="28" fill="#B76E79"/>
               <circle cx="30" cy="30" r="28" fill="none" stroke="#7d3f4a" stroke-width="2" opacity=".55"/>
               <circle cx="30" cy="30" r="21.5" fill="none" stroke="#F7E7CE" stroke-width="1.1" opacity=".9"/>
-              <text x="30" y="35" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-weight="600" font-size="14" letter-spacing=".6" fill="#F7E7CE">PIOS</text>
+              <text x="30" y="35" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-weight="600" font-size="22" letter-spacing="0" fill="#F7E7CE">P</text>
             </svg>
           </span>
           <span class="sb-open" aria-live="polite">
@@ -2246,6 +2220,30 @@ footer{padding-bottom:120px !important;}
   </div>
 
   <!-- RSVP -->
+  <!-- CALENDAR -->
+  <section class="rv cal-c" id="scal">
+    <div class="eyebrow">No lo olvides</div>
+    <h2 class="sec-title">Gu&aacute;rdalo</h2>
+    <p>Agrega el evento a tu calendario para no olvidarlo</p>
+    <a class="btn" id="gcalBtn" href="#" target="_blank">A&ntilde;adir a Google Calendar</a>
+  </section>
+
+  <div class="orn rv">
+    <svg viewBox="0 0 300 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="20" x2="96" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
+      <line x1="0" y1="23" x2="88" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
+      <path d="M96 21.5 Q104 7 116 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
+      <path d="M122 21.5 L126.5 15.5 L131 21.5 L126.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
+      <path d="M150 6 L165 21.5 L150 37 L135 21.5 Z" fill="rgba(183,110,121,0.09)" stroke="#D4AF37" stroke-width="1.05" opacity="0.50"/>
+      <circle cx="150" cy="21.5" r="4.5" fill="rgba(247,231,206,0.22)" stroke="#D4AF37" stroke-width="0.7" opacity="0.58"/>
+      <path d="M169 21.5 L173.5 15.5 L178 21.5 L173.5 27.5 Z" fill="#ffe8e7" fill-opacity="0.40" stroke="#ffe8e7" stroke-width="0.4" opacity="0.5"/>
+      <path d="M184 21.5 Q196 7 204 21.5" stroke="#D4AF37" stroke-width="0.95" fill="none" opacity="0.46"/>
+      <line x1="204" y1="20" x2="300" y2="20" stroke="#c9a46c" stroke-width="0.85" opacity="0.34"/>
+      <line x1="212" y1="23" x2="300" y2="23" stroke="#c9a46c" stroke-width="0.38" opacity="0.16"/>
+    </svg>
+  </div>
+
+  <div class="orn rv"><svg viewBox="0 0 300 42" fill="none"><path d="M96 21.5 Q104 7 116 21.5" stroke="#D4AF37" stroke-width=".95" fill="none" opacity=".46"/><path d="M150 6 L165 21.5 L150 37 L135 21.5 Z" fill="rgba(183,110,121,.09)" stroke="#D4AF37" stroke-width="1.05" opacity=".5"/><path d="M184 21.5 Q196 7 204 21.5" stroke="#D4AF37" stroke-width=".95" fill="none" opacity=".46"/></svg></div>
   <section class="on-ink" id="srsvp">
     <div class="ink-bg ink-bg--oval flip ink-d8" aria-hidden="true"><i></i></div>
   <div class="eyebrow eyebrow-silver rv">Confirma tu Asistencia</div>
@@ -2334,7 +2332,7 @@ footer{padding-bottom:120px !important;}
   <!-- FOOTER — OBLIGATORIA -->
   <footer>
     <div class="fn">Perla Issabela</div>
-    <div class="fd">6 &middot; Febrero &middot; MMXXVII &middot; Ciudad de M&eacute;xico</div>
+    <div class="fd">006 &middot; Febrero &middot; 2027 &middot; Ciudad de M&eacute;xico</div>
     <div style="width:50px;height:1px;margin:18px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4;"></div>
     <p class="credit">Dise&ntilde;o por <a href="https://instagram.com/elysium.invitaciones" target="_blank" rel="noopener">@elysium.invitaciones</a></p>
   </footer>
@@ -2653,7 +2651,7 @@ function initScrollReveal(){
   var URL_INV = 'https://xv-perla-issabela-osorio-soriano.vercel.app';
 
   /* ── Menú ── */
-  var SECS = [['#shero','Inicio'],['#sintro','Mensaje'],['#subic','Ubicación'],['#siti','Itinerario'],['#sdc','Vestimenta'],['#sfam','Mi familia'],['#sgal','Galería'],['#sgifts','Regalos'],['#salbum','Álbum'],['#srsvp','Confirmar']]
+  var SECS = [['#shero','Inicio'],['#sintro','Mensaje'],['#sfam','Mi familia'],['#scd','Cuenta regresiva'],['#subic','Ubicación'],['#siti','Itinerario'],['#sdc','Vestimenta'],['#sgal','Galería'],['#sadultos','No niños'],['#sgifts','Regalos'],['#salbum','Álbum'],['#scal','Calendario'],['#srsvp','Confirmar']]
     .filter(function(x){ return document.querySelector(x[0]); });
   var full = document.getElementById('navFull'), list = document.getElementById('nfList');
   var openB = document.getElementById('navOpen'), closeB = document.getElementById('navClose');
