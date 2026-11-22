@@ -3194,9 +3194,8 @@ window.CelQR=(function(){
         if (respondio){
           var conf = (inv.nombres_confirmados || []).map(clave);
           asignados.forEach(function(nm, i){
-            if (inv.estado === 'declino') choices[i] = 'no';
-            else if (conf.indexOf(clave(nm)) >= 0){ choices[i] = 'si'; si.push(nm); }
-            /* Persona agregada o renombrada después de confirmar: queda por responder */
+            if (inv.estado === 'confirmado' && conf.indexOf(clave(nm)) >= 0){ choices[i] = 'si'; si.push(nm); }
+            else choices[i] = 'no';
           });
           btnText.textContent = 'Actualizar respuesta';
         }
