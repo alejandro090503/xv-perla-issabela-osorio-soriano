@@ -24,7 +24,7 @@ body{
   color:var(--text);background:var(--bg);line-height:1.65;overflow-x:hidden;
 }
 :root{
-  --bg:#fffff1;
+  --bg:#FBDDE6;
   --accent:#B76E79;
   --dark:#7d3f4a;
   --text:#3a2226;
@@ -82,7 +82,7 @@ body{
 #envelope-screen{
   position:fixed;inset:0;z-index:10000;
   overflow:hidden;cursor:pointer;
-  opacity:0;background:#fffbf0;
+  opacity:0;background:#FBDDE6;
 }
 #env-image{
   position:absolute;inset:0;width:100%;height:100%;
@@ -93,14 +93,14 @@ body{
   object-fit:contain;object-position:center;
   z-index:3;opacity:0;
 }
-#env-flash{position:fixed;inset:0;background:#fffbf0;z-index:9999;opacity:0;pointer-events:none;}
+#env-flash{position:fixed;inset:0;background:#FBDDE6;z-index:9999;opacity:0;pointer-events:none;}
 .envelope-hint{
   position:absolute;bottom:56px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;
   font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
   color:#fffbea;opacity:0;cursor:pointer;white-space:nowrap;z-index:10;padding:15px 30px 15px 22px;min-height:52px;
   background:linear-gradient(120deg,#8e4a55 0%,#B76E79 38%,#d9a0a8 52%,#B76E79 66%,#8e4a55 100%);background-size:220% 100%;
   border:1.5px solid rgba(247,231,206,.9);border-radius:999px;
-  box-shadow:0 10px 30px rgba(125,63,74,.38),0 0 0 6px rgba(255,255,241,.35),inset 0 1px 0 rgba(255,255,255,.4);
+  box-shadow:0 10px 30px rgba(125,63,74,.38),0 0 0 6px rgba(251,221,230,.35),inset 0 1px 0 rgba(255,255,255,.4);
   overflow:hidden;animation:hintFloat 3.2s ease-in-out infinite,hintFoil 6s ease-in-out infinite alternate;text-shadow:0 1px 3px rgba(60,20,28,.45);
 }
 .envelope-hint::before{content:'';width:22px;height:22px;flex:none;background:#F7E7CE;
@@ -139,7 +139,7 @@ body{
   align-items:center;background:#2a1018;overflow:hidden;
 }
 .hero-bg{position:absolute;inset:-14% 0;overflow:hidden;}
-.hero-drift{position:absolute;inset:0;background:url('hero-inicio.jpg') 59% 30%/cover no-repeat;animation:heroDrift 20s ease-in-out infinite alternate;}
+.hero-drift{position:absolute;inset:0;background:url('hero-perla.jpg') 30% 100%/auto 115% no-repeat;animation:heroDrift 20s ease-in-out infinite alternate;}
 @keyframes heroDrift{0%{transform:translate(-2%,-1.5%) scale(1.04)}100%{transform:translate(2%,1.5%) scale(1.16)}}
 .hero-veil{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to bottom,rgba(40,14,22,0) 0%,rgba(40,14,22,0) 46%,rgba(46,16,26,.42) 64%,rgba(36,12,20,.8) 100%),
@@ -697,7 +697,7 @@ section{padding:64px 26px;}
   width:100%;max-width:360px;margin:0 auto;
   padding:18px 36px;border-radius:50px;
   border:1.5px solid rgba(212,175,55,.50);
-  background:linear-gradient(135deg,#ffe8e7 0%,#fffbf0 100%);
+  background:linear-gradient(135deg,#ffe8e7 0%,#FBDDE6 100%);
   font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:700;
   letter-spacing:.35em;text-transform:uppercase;
   color:var(--text);cursor:pointer;min-height:56px;
@@ -1029,7 +1029,7 @@ footer .credit{font-size:13px;color:rgba(58,34,38,.55);}
 /* ── Menú de secciones flotante ── */
 .nav-pill{position:fixed;left:50%;z-index:900;display:flex;align-items:center;gap:6px;
   transform:translate(-50%,40px);opacity:0;pointer-events:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);
-  background:rgba(255,255,241,.72);border:1px solid rgba(212,175,55,.38);border-radius:999px;
+  background:rgba(251,221,230,.72);border:1px solid rgba(212,175,55,.38);border-radius:999px;
   box-shadow:0 18px 50px -12px rgba(125,63,74,.35);padding:6px;}
 .nav-pill.on{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
 .nav-mono{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:15px;letter-spacing:2px;color:var(--accent);padding:0 12px;min-height:44px;display:flex;align-items:center;background:none;border:none;cursor:pointer;}
@@ -1048,9 +1048,9 @@ footer .credit{font-size:13px;color:rgba(58,34,38,.55);}
   .nav-open{display:none;}
 }
 @media (max-width:1023px){
-  .nav-pill{bottom:max(1rem,env(safe-area-inset-bottom));background:rgba(255,255,241,.94);}
+  .nav-pill{bottom:max(1rem,env(safe-area-inset-bottom));background:rgba(251,221,230,.94);}
 }
-.nav-full{position:fixed;inset:0;z-index:1000;background:rgba(255,255,241,.97);
+.nav-full{position:fixed;inset:0;z-index:1000;background:rgba(251,221,230,.97);
   clip-path:circle(0% at 85% 95%);visibility:hidden;transition:clip-path .6s cubic-bezier(.2,.7,.2,1),visibility 0s linear .6s;
   display:flex;flex-direction:column;padding:22px 28px max(24px,env(safe-area-inset-bottom));}
 .nav-full.open{clip-path:circle(150% at 85% 95%);visibility:visible;transition:clip-path .6s cubic-bezier(.2,.7,.2,1),visibility 0s;}
@@ -1095,7 +1095,7 @@ footer .credit{font-size:13px;color:rgba(58,34,38,.55);}
 .ink-d7 i{animation-delay:-3s;animation-duration:28s}
 .ink-d8 i{animation-delay:-20s;animation-direction:alternate-reverse;animation-duration:23s}
 @media (prefers-reduced-motion:reduce){.ink-bg i{animation:none}}
-.on-ink :is(p,h2,h3,.eyebrow,.itin-evt,.itin-time){text-shadow:0 0 12px rgba(255,255,241,.9),0 0 3px rgba(255,255,241,.9)}
+.on-ink :is(p,h2,h3,.eyebrow,.itin-evt,.itin-time){text-shadow:0 0 12px rgba(251,221,230,.9),0 0 3px rgba(251,221,230,.9)}
 
 :root{--foil:linear-gradient(100deg,#6e3540 0%,#a85a67 26%,#c49a2e 50%,#a85a67 74%,#6e3540 100%);
   --foil-dark:linear-gradient(100deg,#c9a24a 0%,#ead9b0 28%,#FFFBEA 50%,#ead9b0 72%,#c9a24a 100%);}
@@ -1134,14 +1134,14 @@ footer .credit{font-size:13px;color:rgba(58,34,38,.55);}
 /* Menú: un solo botón abajo al centro */
 .nav-fab{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));z-index:990;transform:translate(-50%,16px);opacity:0;pointer-events:none;
   display:flex;align-items:center;gap:10px;height:46px;padding:0 20px;border-radius:999px;cursor:pointer;
-  background:rgba(255,255,241,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(212,175,55,.6);
+  background:rgba(251,221,230,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(212,175,55,.6);
   box-shadow:0 8px 24px -8px rgba(125,63,74,.35);color:#7d3f4a;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:16px;letter-spacing:1.5px;
   transition:opacity .7s ease,transform .7s ease;}
 .nav-fab.on{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
 .nav-fab .ic{display:flex;flex-direction:column;gap:4px;width:18px;}
 .nav-fab .ic i{display:block;height:1.5px;border-radius:2px;background:currentColor;}
 .nav-fab .ic i:nth-child(2){width:70%;}
-.nav-full{position:fixed;inset:0;z-index:1000;background:#fffff1;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s linear .45s;
+.nav-full{position:fixed;inset:0;z-index:1000;background:#FBDDE6;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s linear .45s;
   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 28px;}
 .nav-full.open{opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s;}
 .nf-close{position:absolute;top:calc(16px + env(safe-area-inset-top));right:16px;width:46px;height:46px;border-radius:50%;border:none;background:transparent;
@@ -1160,7 +1160,7 @@ footer{padding-bottom:120px !important;}
   .nav-full,.nf-list li,.nav-fab{transition:none !important;}
 }
 
-.on-ink .sec-title,.on-ink .sec-title-gold,.on-ink .intro-firma,.on-ink .gift-store{text-shadow:none !important;filter:drop-shadow(0 0 7px rgba(255,255,241,.95)) !important;}
+.on-ink .sec-title,.on-ink .sec-title-gold,.on-ink .intro-firma,.on-ink .gift-store{text-shadow:none !important;filter:drop-shadow(0 0 7px rgba(251,221,230,.95)) !important;}
 .on-ink .rs-guest,.on-ink [style*="background-clip"]{text-shadow:none !important;}
 
 /* Logos de tiendas: silueta real teñida en oro rosado */
@@ -1170,9 +1170,27 @@ footer{padding-bottom:120px !important;}
 .gift-logo--ph{--lg:url('palacio.svg');width:180px;height:54px;}
 /* Velo crema suave detrás de los textos sobre tinta */
 .ink-bg::after{content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 92% 78% at 50% 50%,rgba(255,255,241,.86) 0%,rgba(255,255,241,.74) 40%,rgba(255,255,241,.45) 70%,rgba(255,255,241,0) 100%);}
+  background:radial-gradient(ellipse 92% 78% at 50% 50%,rgba(251,221,230,.86) 0%,rgba(251,221,230,.74) 40%,rgba(251,221,230,.45) 70%,rgba(251,221,230,0) 100%);}
 .ink-bg i{opacity:.72;}
 @media (prefers-reduced-motion:reduce){.gift-logo{animation:none}}
+
+/* Fondo rosa baby: textos sobre el fondo con contraste */
+html,body{background:var(--bg);}
+.eyebrow,.eyebrow-gold,.eyebrow-silver{color:#76570f !important;}
+.fecha-txt{color:#6e3540;}
+.c3d-hint,.wgal-hint{color:#6e3540 !important;opacity:1 !important;}
+#sgifts>p,.gift-intro{color:#5c2c36 !important;opacity:1 !important;}
+.dc2-sub,.dc-note{color:#6e3540 !important;}
+.nav-fab{background:rgba(255,245,248,.82);}
+.itin-time{color:#8a3c4c !important;}
+.itin-evt{color:#3a2226 !important;}
+#sdc figcaption,#sdc figcaption *,#sdc [class*="dc2-fig"],#sdc [class*="dc2-lbl"],#sdc [class*="dc2-desc"],#sdc [class*="dc2-name"],#sdc .dc2-note,#sdc .dc2-code{color:#5c2c36 !important;opacity:1 !important;}
+/* Portada: nombre compacto para no tapar la foto */
+.hero-name{font-size:clamp(46px,14vw,60px) !important;white-space:nowrap;}
+.xv-num{font-size:46px !important;letter-spacing:9px !important;}
+.xv-anos{margin-top:4px !important;}
+.hero-date-line{margin-top:12px !important;}
+.hero-eyebrow{margin-bottom:8px !important;}
 /* ════ BLOQUES ════ */
 /* ── DRESS CODE (dc2-) ── */
 #sdc{text-align:center}
@@ -1290,7 +1308,7 @@ footer{padding-bottom:120px !important;}
 .c3d-ring{position:absolute;left:50%;top:0;width:0;height:0;transform-style:preserve-3d;will-change:transform;}
 .c3d-item{
   position:absolute;left:calc(var(--c3d-w) / -2);top:40px;width:var(--c3d-w);
-  transform:rotateY(calc(var(--i) * 45.0deg)) translateZ(var(--c3d-r));
+  transform:rotateY(calc(var(--i) * 60deg)) translateZ(var(--c3d-r));
   backface-visibility:hidden;-webkit-backface-visibility:hidden;outline:none;
 }
 .c3d-card{
@@ -1299,13 +1317,13 @@ footer{padding-bottom:120px !important;}
   border:1px solid rgba(212,175,55,.55);
   box-shadow:0 14px 34px -10px rgba(125,63,74,.38),0 2px 8px rgba(212,175,55,.18);
 }
-.c3d-card::after{content:"";position:absolute;inset:5px;border:1px solid rgba(255,255,241,.55);border-radius:10px;pointer-events:none;}
+.c3d-card::after{content:"";position:absolute;inset:5px;border:1px solid rgba(251,221,230,.55);border-radius:10px;pointer-events:none;}
 .c3d-card img,.c3d-refl-in img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
 .c3d-item:focus-visible .c3d-card{outline:2px solid var(--gold,#D4AF37);outline-offset:3px;}
 /* reflejo: div volteado + velo del color de fondo */
 .c3d-refl{position:relative;width:100%;height:calc(var(--c3d-h) * .4);margin-top:4px;overflow:hidden;border-radius:0 0 14px 14px;pointer-events:none;}
 .c3d-refl-in{position:absolute;left:0;top:0;width:100%;height:var(--c3d-h);transform:scaleY(-1);opacity:.5;}
-.c3d-refl::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,241,.55) 0%,rgba(255,255,241,.9) 55%,#fffff1 92%);}
+.c3d-refl::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(251,221,230,.55) 0%,rgba(251,221,230,.9) 55%,#fffff1 92%);}
 .c3d-hint{
   text-align:center;margin-top:6px;padding:0 26px;
   font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:16px;
@@ -1327,7 +1345,7 @@ footer{padding-bottom:120px !important;}
 .c3d-lb.on .c3d-lb-img{transform:scale(1);opacity:1;}
 .c3d-lb-close,.c3d-lb-nav{
   position:absolute;width:46px;height:46px;border-radius:50%;cursor:pointer;
-  border:1px solid rgba(212,175,55,.65);background:rgba(255,255,241,.12);color:#F7E7CE;
+  border:1px solid rgba(212,175,55,.65);background:rgba(251,221,230,.12);color:#F7E7CE;
   font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;
   display:flex;align-items:center;justify-content:center;padding:0 0 3px;
 }
@@ -1432,7 +1450,7 @@ footer{padding-bottom:120px !important;}
 .rs-btn{
   position:relative;display:flex;align-items:center;justify-content:center;
   width:100%;max-width:360px;margin:0 auto;padding:18px 28px;min-height:56px;border-radius:50px;
-  border:1.5px solid rgba(212,175,55,.55);background:linear-gradient(135deg,#ffe8e7 0%,#fffbf0 100%);
+  border:1.5px solid rgba(212,175,55,.55);background:linear-gradient(135deg,#ffe8e7 0%,#FBDDE6 100%);
   font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
   color:#3a2226;cursor:pointer;box-shadow:0 6px 20px rgba(255,232,231,.55),0 2px 8px rgba(212,175,55,.20);
 }
@@ -1916,7 +1934,7 @@ footer{padding-bottom:120px !important;}
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           </div>
           <div class="loc1-label">Misa de XV A&ntilde;os</div>
-          <div class="loc1-time">6:00 <span style="font-size:18px;letter-spacing:3px;">PM</span></div>
+          <div class="loc1-time">5:30 <span style="font-size:18px;letter-spacing:3px;">PM</span></div>
           <div class="loc1-addr">Iglesia Carmelitas Descalzos<br><span class="loc1-city">Fernando Montes de Oca 150, San Miguel Chapultepec I Secci&oacute;n,<br>Miguel Hidalgo, 11850 Ciudad de M&eacute;xico, CDMX</span></div>
           <div class="loc1-hsep"></div>
         </div>
@@ -1971,7 +1989,7 @@ footer{padding-bottom:120px !important;}
     <h2 class="sec-title rv">Itinerario</h2>
     <div class="itin-grid" id="itinGrid">
       <div class="itin-spine"></div>
-      <div class="itin-item itin-row-l"><div class="itin-time">6:00 pm</div><div class="itin-evt">Misa</div></div>
+      <div class="itin-item itin-row-l"><div class="itin-time">5:30 pm</div><div class="itin-evt">Misa</div></div>
       <div class="itin-dot-col"><div class="itin-dot"></div></div>
       <div></div>
       <div></div>
@@ -2081,13 +2099,11 @@ footer{padding-bottom:120px !important;}
   <div class="c3d-scene" id="c3d-scene" aria-label="Galer&iacute;a de fotos de Perla Issabela">
     <div class="c3d-ring" id="c3d-ring">
       <div class="c3d-item" style="--i:0" role="button" tabindex="0" aria-label="Ver foto 1"><div class="c3d-card"><img src="foto-02.jpg" alt="Perla Issabela" style="object-position:40% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-02.jpg" alt="" style="object-position:40% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:1" role="button" tabindex="0" aria-label="Ver foto 2"><div class="c3d-card"><img src="foto-03.jpg" alt="Perla Issabela" style="object-position:50% 60%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-03.jpg" alt="" style="object-position:50% 60%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:2" role="button" tabindex="0" aria-label="Ver foto 3"><div class="c3d-card"><img src="foto-04.jpg" alt="Perla Issabela" style="object-position:60% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-04.jpg" alt="" style="object-position:60% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:3" role="button" tabindex="0" aria-label="Ver foto 4"><div class="c3d-card"><img src="foto-05.jpg" alt="Perla Issabela" style="object-position:50% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-05.jpg" alt="" style="object-position:50% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:4" role="button" tabindex="0" aria-label="Ver foto 5"><div class="c3d-card"><img src="foto-06.jpg" alt="Perla Issabela" style="object-position:70% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-06.jpg" alt="" style="object-position:70% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:5" role="button" tabindex="0" aria-label="Ver foto 6"><div class="c3d-card"><img src="foto-10.jpg" alt="Perla Issabela" style="object-position:40% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-10.jpg" alt="" style="object-position:40% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:6" role="button" tabindex="0" aria-label="Ver foto 7"><div class="c3d-card"><img src="foto-11.jpg" alt="Perla Issabela" style="object-position:55% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-11.jpg" alt="" style="object-position:55% 50%" draggable="false"></div></div></div>
-      <div class="c3d-item" style="--i:7" role="button" tabindex="0" aria-label="Ver foto 8"><div class="c3d-card"><img src="foto-12.jpg" alt="Perla Issabela" style="object-position:50% 85%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-12.jpg" alt="" style="object-position:50% 85%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:1" role="button" tabindex="0" aria-label="Ver foto 2"><div class="c3d-card"><img src="foto-04.jpg" alt="Perla Issabela" style="object-position:60% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-04.jpg" alt="" style="object-position:60% 50%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:2" role="button" tabindex="0" aria-label="Ver foto 3"><div class="c3d-card"><img src="foto-05.jpg" alt="Perla Issabela" style="object-position:50% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-05.jpg" alt="" style="object-position:50% 50%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:3" role="button" tabindex="0" aria-label="Ver foto 4"><div class="c3d-card"><img src="foto-10.jpg" alt="Perla Issabela" style="object-position:40% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-10.jpg" alt="" style="object-position:40% 50%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:4" role="button" tabindex="0" aria-label="Ver foto 5"><div class="c3d-card"><img src="foto-11.jpg" alt="Perla Issabela" style="object-position:55% 50%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-11.jpg" alt="" style="object-position:55% 50%" draggable="false"></div></div></div>
+      <div class="c3d-item" style="--i:5" role="button" tabindex="0" aria-label="Ver foto 6"><div class="c3d-card"><img src="foto-12.jpg" alt="Perla Issabela" style="object-position:50% 85%" draggable="false"></div><div class="c3d-refl" aria-hidden="true"><div class="c3d-refl-in"><img src="foto-12.jpg" alt="" style="object-position:50% 85%" draggable="false"></div></div></div>
     </div>
   </div>
   <p class="c3d-hint rv">Desliza para girar &middot; toca una foto</p>
@@ -2463,9 +2479,9 @@ function initScrollReveal(){
   });
 })();
 
-/* COUNTDOWN — 6 febrero 2027 18:00 CDMX (UTC-6) */
+/* COUNTDOWN — 6 febrero 2027 17:30 CDMX (UTC-6) */
 (function(){
-  var target=new Date('2027-02-06T18:00:00-06:00').getTime();
+  var target=new Date('2027-02-06T17:30:00-06:00').getTime();
   var C=314.16;
   var ringsAnimated=false;
   function setRing(type,fraction){
@@ -2510,10 +2526,10 @@ function initScrollReveal(){
 /* GOOGLE CALENDAR */
 (function(){
   var t=encodeURIComponent('XV Años de Perla Issabela Osorio Soriano');
-  var d=encodeURIComponent('Misa de XV Años: 6:00 PM, Iglesia Carmelitas Descalzos | Recepción: 7:30 PM, Salón Le Crillon - Salón Biarritz — Ciudad de México');
+  var d=encodeURIComponent('Misa de XV Años: 5:30 PM, Iglesia Carmelitas Descalzos | Recepción: 7:30 PM, Salón Le Crillon - Salón Biarritz — Ciudad de México');
   var l=encodeURIComponent('Iglesia Carmelitas Descalzos, Ciudad de México');
   document.getElementById('gcalBtn').href=
-    'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+t+'&dates=20270207T000000Z/20270207T083000Z&details='+d+'&location='+l;
+    'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+t+'&dates=20270206T233000Z/20270207T083000Z&details='+d+'&location='+l;
 })();
 
 /* LIGHTBOX */
