@@ -1618,6 +1618,49 @@ footer{padding-bottom:120px !important;}
   #music-btn.is-playing .vinyl-spin,#music-btn.is-playing::after{animation:none}
   #music-btn.vinyl-btn,#music-btn .vinyl-tonearm{transition-duration:.01s}
 }
+
+/* ── Celestial: mensaje + códigos QR de acceso ── */
+.cel-msg{margin:16px 0 4px;text-align:left}
+.cel-msg label{display:block;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px}
+.cel-msg label small{letter-spacing:.04em;text-transform:none;font-weight:500;opacity:.8}
+.cel-msg textarea{width:100%;min-height:92px;resize:vertical;padding:12px 14px;border-radius:12px;border:1.5px solid rgba(212,175,55,.4);background:#fff;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.45;outline:none;box-sizing:border-box}
+.cel-msg textarea::placeholder{color:rgba(58,34,38,.5)}
+.mqr{margin:22px auto 0;max-width:400px;text-align:center}
+.mqr-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--dark);margin:0 0 4px}
+.mqr-hint{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;line-height:1.5;color:rgba(58,34,38,.82);margin:0 auto 14px;max-width:320px}
+.mqr-carousel{position:relative;max-width:340px;margin:0 auto}
+.mqr-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 11%}
+.mqr-track::-webkit-scrollbar{display:none}
+.mqr-card{flex:0 0 78%;scroll-snap-align:center;background:#fff;border:1.5px solid rgba(212,175,55,.5);border-radius:14px;padding:16px 12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18);transform:scale(.92);opacity:.55;transition:transform .35s,opacity .35s;box-sizing:border-box}
+.mqr-card.is-active{transform:none;opacity:1}
+.mqr-img{display:block;width:150px;height:150px;margin:0 auto;border-radius:6px}
+.mqr-name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;line-height:1.25;color:#1d1d1d;margin:10px 0 0;overflow-wrap:anywhere}
+.mqr-mesa{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7d3f4a;margin:6px 0 0}
+.mqr-code{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#7d3f4a;margin:9px 0 0}
+.mqr-code span{display:block;margin-top:3px;font-family:'Courier New',monospace;font-size:14px;letter-spacing:1.5px;text-transform:none;color:#1d1d1d}
+.mqr-dl{display:inline-block;margin-top:10px;padding:8px 20px;border:1.5px solid rgba(212,175,55,.5);border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7d3f4a;text-decoration:none}
+.mqr-nav{position:absolute;top:40%;transform:translateY(-50%);z-index:2;width:32px;height:32px;border-radius:50%;border:1px solid rgba(212,175,55,.5);background:#fff;color:#7d3f4a;font-size:18px;line-height:1;cursor:pointer}
+.mqr-nav--prev{left:-6px}.mqr-nav--next{right:-6px}
+.mqr-nav:disabled{opacity:0;pointer-events:none}
+.mqr-foot{margin-top:12px}
+.mqr-dots{display:flex;justify-content:center;gap:7px}
+.mqr-dots button{width:7px;height:7px;padding:0;border:0;border-radius:4px;background:rgba(183,110,121,.3);cursor:pointer;transition:width .3s,background .3s}
+.mqr-dots button.is-active{width:20px;background:#B76E79}
+.mqr-count{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(58,34,38,.82);margin:9px 0 0}
+.mqr-carousel.is-single .mqr-nav,.mqr-foot.is-single{display:none}
+.mqr-carousel.is-single .mqr-card{flex-basis:84%;transform:none;opacity:1}
+
+/* Nombres asignados: una tarjeta por persona */
+.rs-personas{display:grid;gap:12px;max-width:360px;margin:0 auto 6px}
+.rs-persona{padding:16px 14px 14px;border:1.5px solid rgba(212,175,55,.4);border-radius:16px;background:rgba(255,255,255,.82);transition:border-color .25s,box-shadow .25s}
+.rs-persona.rs-falta-card{border-color:#a3311f;box-shadow:0 0 0 3px rgba(163,49,31,.12)}
+.rs-persona-nombre{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;line-height:1.25;color:var(--dark);margin:0 0 12px;overflow-wrap:anywhere}
+.rs-persona-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rs-va{min-height:46px;padding:8px 6px;border-radius:12px;border:1.5px solid rgba(183,110,121,.45);background:#fff;color:var(--dark);font-family:'Cormorant Garamond',serif;font-weight:700;font-size:17px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.rs-va.on-si{background:var(--accent);border-color:var(--accent);color:#fff}
+.rs-va.on-no{background:rgba(125,63,74,.12);border-color:var(--dark);color:var(--dark)}
+.rs-va:disabled{opacity:.55;cursor:not-allowed}
+.rs-trans-msg{max-width:360px;margin:0 auto 14px}
 </style>
 </head>
 <body>
@@ -2250,27 +2293,11 @@ footer{padding-bottom:120px !important;}
           <span class="rs-pases-label">Pases</span>
           <span class="rs-pases-num" id="rs-pases-num">1</span>
         </div>
-        <div class="rs-pases-box rs-menores" id="rs-menores" style="display:none">
-          <span class="rs-pases-label">Menores</span>
-          <span class="rs-pases-num" id="rs-menores-num">0</span>
-        </div>
       </div>
 
       <div id="rs-bandeja">
-        <div class="rs-toggle">
-          <button class="rs-toggle-btn" id="rs-yes" type="button">Asistir&eacute;</button>
-          <button class="rs-toggle-btn" id="rs-no" type="button">No podr&eacute; asistir</button>
-        </div>
-        <div class="rs-contador-wrap" id="rs-contador-wrap">
-          <p class="rs-contador-nota" id="rs-contador-nota"></p>
-          <div class="rs-contador">
-            <button class="rs-contador-btn" id="rs-menos" type="button" aria-label="Quitar un pase">&minus;</button>
-            <span class="rs-contador-valor" id="rs-contador-valor" aria-live="polite">1</span>
-            <button class="rs-contador-btn" id="rs-mas" type="button" aria-label="Agregar un pase">+</button>
-          </div>
-          <p class="rs-contador-pie" id="rs-contador-pie"></p>
-        </div>
-        <div class="rs-fields" id="rs-fields" style="display:none"></div>
+        <div class="rs-personas" id="rs-personas"></div>
+        <div class="rs-trans-msg"><div class="cel-msg" id="celMsgWrap"><label for="celMensaje">Mensaje para Perla <small>(opcional)</small></label><textarea id="celMensaje" maxlength="1000" placeholder="Escríbele unas palabras a la quinceañera…"></textarea></div></div>
         <button class="rs-btn" id="rs-confirm-btn" type="button">
           <span id="rs-btn-text">Confirmar Asistencia</span>
         </button>
@@ -2281,6 +2308,17 @@ footer{padding-bottom:120px !important;}
         <p class="rs-gracias-title" id="rs-gracias-title"></p>
         <p class="rs-gracias-sub" id="rs-gracias-sub"></p>
         <button class="rs-editar-btn" id="rs-editar-btn" type="button">Modificar mi respuesta</button>
+      </div>
+
+      <div class="mqr" id="mqrSec" style="display:none">
+        <p class="mqr-title">Tus códigos de acceso</p>
+        <p class="mqr-hint" id="mqrHint"></p>
+        <div class="mqr-carousel" id="mqrCarousel">
+          <button class="mqr-nav mqr-nav--prev" id="mqrPrev" type="button" aria-label="Anterior">&lsaquo;</button>
+          <div class="mqr-track" id="mqrTrack"></div>
+          <button class="mqr-nav mqr-nav--next" id="mqrNext" type="button" aria-label="Siguiente">&rsaquo;</button>
+        </div>
+        <div class="mqr-foot" id="mqrFoot"><div class="mqr-dots" id="mqrDots"></div><p class="mqr-count" id="mqrCount"></p></div>
       </div>
 
       <p id="rs-feedback" role="status" aria-live="polite" style="display:none"></p>
@@ -2815,6 +2853,70 @@ function initScrollReveal(){
 })();
 </script>
 <script>
+/* ── Celestial: códigos QR de acceso (el panel los entrega cuando se generan) ── */
+window.CelQR=(function(){
+  var LIB='https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js';
+  var sec=document.getElementById('mqrSec'),track=document.getElementById('mqrTrack'),dots=document.getElementById('mqrDots');
+  if(!sec)return{pintar:function(){},ocultar:function(){}};
+  var cards=[],idx=0,gen=0;
+  function lib(cb){
+    if(window.QRCode)return cb();
+    var sc=document.getElementById('qrcode-lib');
+    if(!sc){sc=document.createElement('script');sc.id='qrcode-lib';sc.src=LIB;document.head.appendChild(sc);}
+    sc.addEventListener('load',function(){if(window.QRCode)cb();});
+  }
+  function irA(i,suave){var c=cards[i];if(!c)return;track.scrollTo({left:c.offsetLeft-(track.clientWidth-c.clientWidth)/2,behavior:suave===false?'auto':'smooth'});}
+  function marcar(){
+    if(!cards.length)return;
+    var centro=track.scrollLeft+track.clientWidth/2,mejor=0,dist=Infinity;
+    cards.forEach(function(c,i){var d=Math.abs(c.offsetLeft+c.clientWidth/2-centro);if(d<dist){dist=d;mejor=i;}});
+    idx=mejor;
+    cards.forEach(function(c,i){c.classList.toggle('is-active',i===mejor);});
+    Array.prototype.forEach.call(dots.children,function(d,k){d.classList.toggle('is-active',k===mejor);});
+    document.getElementById('mqrCount').textContent='Pase '+(mejor+1)+' de '+cards.length;
+    document.getElementById('mqrPrev').disabled=mejor===0;
+    document.getElementById('mqrNext').disabled=mejor===cards.length-1;
+  }
+  var raf=0;
+  track.addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;marcar();});},{passive:true});
+  document.getElementById('mqrPrev').addEventListener('click',function(){irA(Math.max(0,idx-1));});
+  document.getElementById('mqrNext').addEventListener('click',function(){irA(Math.min(cards.length-1,idx+1));});
+  function ocultar(){gen++;sec.style.display='none';}
+  function pintar(qrs,pendientes){
+    var g=++gen,hint=document.getElementById('mqrHint'),car=document.getElementById('mqrCarousel'),foot=document.getElementById('mqrFoot');
+    track.innerHTML='';dots.innerHTML='';cards=[];
+    if(!qrs||!qrs.length){
+      if(!pendientes){sec.style.display='none';return;}
+      hint.textContent='Tus códigos de acceso aparecerán aquí cuando se acerque el evento. Vuelve a abrir tu invitación unos días antes.';
+      car.style.display='none';foot.style.display='none';sec.style.display='block';return;
+    }
+    hint.textContent=qrs.length===1?'Presenta este código en la entrada.':'Presenta un código por persona en la entrada.';
+    car.style.display='';foot.style.display='';sec.style.display='block';
+    var single=qrs.length<2;car.classList.toggle('is-single',single);foot.classList.toggle('is-single',single);
+    lib(function(){
+      if(g!==gen)return;
+      track.innerHTML='';dots.innerHTML='';cards=[];
+      qrs.forEach(function(q,i){
+        var card=document.createElement('div');card.className='mqr-card';
+        var img=document.createElement('img');img.className='mqr-img';img.alt='Código QR de '+String(q.nombre_persona||'').split(' — ')[0];img.width=150;img.height=150;card.appendChild(img);
+        var nm=document.createElement('p');nm.className='mqr-name';nm.textContent=String(q.nombre_persona||'').split(' — ')[0];card.appendChild(nm);
+        if(q.mesa){var me=document.createElement('p');me.className='mqr-mesa';me.textContent='Mesa '+q.mesa;card.appendChild(me);}
+        var cod=document.createElement('p');cod.className='mqr-code';cod.textContent='Código de respaldo';
+        var sp=document.createElement('span');sp.textContent=q.codigo;cod.appendChild(sp);card.appendChild(cod);
+        var dl=document.createElement('a');dl.className='mqr-dl';dl.textContent='Descargar';dl.download='Pase XV Perla Issabela - '+String(q.nombre_persona||'').split(' — ')[0]+'.png';card.appendChild(dl);
+        window.QRCode.toDataURL(q.codigo,{width:480,margin:2,errorCorrectionLevel:'M',color:{dark:'#7d3f4a',light:'#FFFFFF'}},function(err,url){if(err)return;img.src=url;dl.href=url;});
+        card.addEventListener('click',function(e){if(i!==idx&&e.target!==dl)irA(i);});
+        track.appendChild(card);cards.push(card);
+        var dot=document.createElement('button');dot.type='button';dot.setAttribute('aria-label',(i+1)+'');
+        dot.addEventListener('click',function(){irA(i);});dots.appendChild(dot);
+      });
+      idx=0;requestAnimationFrame(function(){irA(0,false);marcar();});
+    });
+  }
+  return{pintar:pintar,ocultar:ocultar};
+})();
+</script>
+<script>
 /* Dress code (dc2-) — las animaciones CSS solo corren mientras #sdc está en pantalla */
 (function(){
   var sec=document.getElementById('sdc');
@@ -2956,330 +3058,189 @@ function initScrollReveal(){
     });
   }
 })();
-/* ── RSVP · Panel de Invitados — versión "X pases" (rs-) ── */
+/* ── RSVP · Panel Celestial / QR (nombres asignados: una tarjeta por persona) ── */
 (function(){
-  var PANEL_API = 'https://panel-invitados.vercel.app/api/confirmar';
-  var RSVP_URL  = 'https://xv-perla-issabela-osorio-soriano.vercel.app';
-  var DEADLINE  = new Date('2027-01-15T23:59:59-06:00');   /* 15 ene 2027, hora CDMX */
-  var frozen    = Date.now() > DEADLINE.getTime();
+  var API = 'https://panel-invitados-qr.vercel.app/api/confirmar';
+  var URL_EVENTO = 'https://xv-perla-issabela-osorio-soriano.vercel.app';
+  /* La fecha límite la manda el panel (se amplía desde ahí). Este respaldo solo
+     se usa si el panel no responde: nunca se congela al cargar. */
+  var RESPALDO = new Date('2027-01-15T23:59:59-06:00').getTime();
   var ERR = '#a3311f';
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ?i= token base64url "nombre|pases" (sobrevive a WhatsApp); también ?para=&pases= */
+  /* ?i= token base64url "nombre|pases|menores"; también ?para= */
   function decodeInvite(tok){
-    try{
-      var b64 = tok.replace(/-/g,'+').replace(/_/g,'/');
-      while(b64.length % 4) b64 += '=';
+    try {
+      var b64 = tok.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
       var bin = atob(b64), bytes = new Uint8Array(bin.length);
-      for(var i=0;i<bin.length;i++){ bytes[i] = bin.charCodeAt(i); }
-      var p = new TextDecoder().decode(bytes).split('|');
-      return { para:(p[0]||'').trim(), pases: parseInt(p[1],10) || 1 };
-    }catch(e){ return null; }
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return (new TextDecoder().decode(bytes).split('|')[0] || '').trim();
+    } catch (e) { return ''; }
   }
-  var qp = new URLSearchParams(location.search);
-  var hp = new URLSearchParams(location.hash.replace(/^#/,''));
-  var urlPara = '', rawP = 1;
-  var token = qp.get('i') || hp.get('i');
-  if(token){
-    var dec = decodeInvite(token);
-    if(dec && dec.para){ urlPara = dec.para; rawP = dec.pases; }
-  }
-  if(!urlPara){
-    urlPara = (qp.get('para') || hp.get('para') || '').trim();
-    rawP    = parseInt(qp.get('pases') || hp.get('pases'), 10);
-  }
-  var pasesAsignados = (isNaN(rawP) || rawP < 1 || rawP > 20) ? 1 : rawP;
+  function clave(x){ return String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+  var qp = new URLSearchParams(location.search), hp = new URLSearchParams(location.hash.replace(/^#/, ''));
+  var tok = qp.get('i') || hp.get('i');
+  var para = tok ? decodeInvite(tok) : '';
+  if (!para) para = (qp.get('para') || hp.get('para') || '').trim();
 
-  var rsvpChoice = null;
-  var savedNames = [];
-  var pasesAUsar = 1;        /* arranca en 1 y nunca pasa del tope */
-
+  var frozen = false, listo = false, anulada = false, enviando = false;
+  var asignados = [], choices = [];
   function $(id){ return document.getElementById(id); }
-  var nameEl     = $('rs-guest');
-  var pasesNumEl = $('rs-pases-num');
-  var pasesDisp  = $('rs-pases');
-  var menoresBox = $('rs-menores');
-  var menoresNum = $('rs-menores-num');
-  var fieldsEl   = $('rs-fields');
-  var bandejaEl  = $('rs-bandeja');
-  var graciasEl  = $('rs-gracias');
-  var gTitleEl   = $('rs-gracias-title');
-  var gSubEl     = $('rs-gracias-sub');
-  var editarBtn  = $('rs-editar-btn');
-  var btnYes     = $('rs-yes');
-  var btnNo      = $('rs-no');
-  var btnConf    = $('rs-confirm-btn');
-  var btnText    = $('rs-btn-text');
-  var feedEl     = $('rs-feedback');
-  var contWrap   = $('rs-contador-wrap');
-  var contNota   = $('rs-contador-nota');
-  var contValor  = $('rs-contador-valor');
-  var contPie    = $('rs-contador-pie');
-  var btnMenos   = $('rs-menos');
-  var btnMas     = $('rs-mas');
-  if(!btnConf || !btnYes) return;
+  var nameEl = $('rs-guest'), lblEl = $('rs-guest-lbl'), pasesNumEl = $('rs-pases-num'), pasesDisp = $('rs-pases');
+  var personas = $('rs-personas'), bandejaEl = $('rs-bandeja'), graciasEl = $('rs-gracias');
+  var gTitleEl = $('rs-gracias-title'), gSubEl = $('rs-gracias-sub'), editarBtn = $('rs-editar-btn');
+  var btnConf = $('rs-confirm-btn'), btnText = $('rs-btn-text'), feedEl = $('rs-feedback'), msgEl = $('celMensaje');
+  if (!btnConf || !personas) return;
 
+  function cerrado(){ return frozen || !listo || anulada; }
   function say(msg, color){
-    if(!msg){ feedEl.style.display = 'none'; feedEl.textContent = ''; return; }
-    feedEl.style.display = 'block';
-    feedEl.style.color = color || '#7d3f4a';
-    feedEl.textContent = msg;
+    if (!msg){ feedEl.style.display = 'none'; feedEl.textContent = ''; return; }
+    feedEl.style.display = 'block'; feedEl.style.color = color || '#7d3f4a'; feedEl.textContent = msg;
+  }
+  function fijarFecha(iso, desdePanel){
+    var lim = desdePanel ? (iso ? new Date(iso).getTime() : null) : RESPALDO;
+    if (lim !== null && isNaN(lim)) lim = RESPALDO;
+    frozen = lim !== null && Date.now() > lim;
+    listo = true;
+  }
+  function pintarEstado(){
+    var off = cerrado();
+    btnConf.disabled = off || enviando || !asignados.length;
+    editarBtn.disabled = frozen;
+    if (msgEl) msgEl.disabled = off;
+    personas.querySelectorAll('button').forEach(function(b){ b.disabled = off; });
+    if (frozen) btnText.textContent = 'Fecha límite alcanzada';
+  }
+  function pintarPersonas(){
+    personas.innerHTML = '';
+    asignados.forEach(function(nm, i){
+      var card = document.createElement('div'); card.className = 'rs-persona';
+      var p = document.createElement('p'); p.className = 'rs-persona-nombre'; p.textContent = nm;
+      var t = document.createElement('div'); t.className = 'rs-persona-btns';
+      [['si', 'Asistirá'], ['no', 'No asistirá']].forEach(function(o){
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'rs-va'; b.textContent = o[1];
+        var on = choices[i] === o[0];
+        if (on) b.classList.add('on-' + o[0]);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.addEventListener('click', function(){ if (cerrado()) return; choices[i] = o[0]; say(''); pintarPersonas(); });
+        t.appendChild(b);
+      });
+      card.appendChild(p); card.appendChild(t); personas.appendChild(card);
+    });
+    pintarEstado();
   }
 
-  function paintHeader(){
-    pasesNumEl.textContent = pasesAsignados;
-    if(urlPara){
-      pasesDisp.style.display = 'flex';
-      nameEl.textContent = urlPara;
-      nameEl.setAttribute('data-name', urlPara);
-      nameEl.style.display = 'block';
-      var gl = $('rs-guest-lbl'); if(gl) gl.style.display = 'block';
-    }
-  }
-  paintHeader();
-
-  /* Un campo por cada pase que VA A USAR. */
-  function renderFields(){
-    fieldsEl.innerHTML = '';
-    for(var i = 0; i < pasesAUsar; i++){
-      var inp = document.createElement('input');
-      inp.type = 'text';
-      inp.className = 'rs-input';
-      inp.placeholder = pasesAUsar === 1 ? 'Tu nombre completo' : 'Nombre completo del invitado ' + (i+1);
-      inp.autocomplete = 'off';
-      inp.maxLength = 60;
-      inp.disabled = frozen;
-      inp.value = savedNames[i] || '';
-      (function(idx){ inp.addEventListener('input', function(){ savedNames[idx] = this.value; this.classList.remove('rs-falta'); }); })(i);
-      fieldsEl.appendChild(inp);
-    }
-  }
-
-  /* Contador: solo con "Asistiré" y más de un pase. */
-  function pintaContador(){
-    var ver = rsvpChoice === 'yes' && pasesAsignados > 1;
-    contWrap.style.display = ver ? 'block' : 'none';
-    if(!ver) return;
-    contValor.textContent = pasesAUsar;
-    contNota.textContent = 'Tienes ' + pasesAsignados + ' pases reservados. Aumenta el número de pases que vayas a ocupar.';
-    contPie.textContent = pasesAUsar >= pasesAsignados ? 'Usarás todos tus pases' : pasesAUsar + ' de ' + pasesAsignados + ' pases';
-    btnMenos.disabled = frozen || pasesAUsar <= 1;
-    btnMas.disabled   = frozen || pasesAUsar >= pasesAsignados;
-  }
-  function setPases(n){
-    if(frozen) return;
-    var v = Math.max(1, Math.min(pasesAsignados, n));
-    if(v === pasesAUsar) return;
-    pasesAUsar = v;
-    pintaContador();
-    renderFields();
-    say('');
-  }
-  btnMenos.addEventListener('click', function(){ setPases(pasesAUsar - 1); });
-  btnMas.addEventListener('click',   function(){ setPases(pasesAUsar + 1); });
-
-  function selectRsvp(choice){
-    rsvpChoice = choice;
-    btnYes.classList.toggle('rs-sel-yes', choice === 'yes');
-    btnNo.classList.toggle('rs-sel-no', choice === 'no');
-    if(choice === 'yes'){
-      renderFields();
-      fieldsEl.style.display = 'flex';
-    } else {
-      fieldsEl.style.display = 'none';
-      fieldsEl.innerHTML = '';
-    }
-    pintaContador();
-  }
-  btnYes.addEventListener('click', function(){ if(!frozen){ selectRsvp('yes'); say(''); } });
-  btnNo.addEventListener('click',  function(){ if(!frozen){ selectRsvp('no');  say(''); } });
-
-  /* Confeti en la paleta (solo transform/opacity) */
   function confetti(){
-    if(RM || !window.gsap) return;
+    if (RM || !window.gsap) return;
     var cols = ['#D4AF37','#F7E7CE','#B76E79','#ffe8e7','#7d3f4a','#a8862a'];
-    for(var i = 0; i < 46; i++){
+    for (var i = 0; i < 46; i++){
       var el = document.createElement('div');
       el.className = 'rs-confetti';
       el.style.left = (Math.random() * 100) + 'vw';
       el.style.background = cols[i % cols.length];
-      if(i % 3 === 0){ el.style.borderRadius = '50%'; el.style.width = el.style.height = '9px'; }
+      if (i % 3 === 0){ el.style.borderRadius = '50%'; el.style.width = el.style.height = '9px'; }
       document.body.appendChild(el);
       gsap.fromTo(el,
         { y: 0, x: 0, rotation: Math.random() * 360, opacity: 1 },
         { y: window.innerHeight + 60, x: (Math.random() - .5) * 160, rotation: '+=' + (360 + Math.random() * 540),
           opacity: 0.9, duration: 2.2 + Math.random() * 1.8, delay: Math.random() * .5, ease: 'power1.in',
-          onComplete: (function(n){ return function(){ if(n.parentNode) n.parentNode.removeChild(n); }; })(el) });
+          onComplete: (function(n){ return function(){ if (n.parentNode) n.parentNode.removeChild(n); }; })(el) });
     }
   }
 
-  /* Bandeja <-> agradecimiento. Siempre hay ruta de regreso. */
   function mostrarGracias(estado, nombres){
-    var lista = (nombres || []).filter(function(n){ return n && String(n).trim(); });
-    if(estado === 'confirmado'){
+    if (estado === 'confirmado'){
       gTitleEl.textContent = '¡Gracias por confirmar!';
-      gSubEl.textContent = lista.length === 1
-        ? 'Te esperamos, ' + lista[0] + '.'
-        : 'Confirmamos ' + lista.length + ' lugares: ' + lista.join(', ') + '.';
+      gSubEl.textContent = nombres.length === 1 ? 'Te espero, ' + nombres[0] + '.' : 'Confirmamos ' + nombres.length + ' lugares: ' + nombres.join(', ') + '.';
     } else {
-      gTitleEl.textContent = 'Gracias por avisarnos';
-      gSubEl.textContent = 'Lamentamos que no puedas acompañarnos. Te vamos a extrañar.';
+      gTitleEl.textContent = 'Gracias por avisarme';
+      gSubEl.textContent = 'Lamento que no puedan acompañarme. Los voy a extrañar.';
     }
-    bandejaEl.style.display = 'none';
-    graciasEl.style.display = '';
-    editarBtn.disabled = frozen;
-    say('');
+    bandejaEl.style.display = 'none'; graciasEl.style.display = '';
+    editarBtn.disabled = frozen; say('');
   }
-  function abrirBandeja(){
-    graciasEl.style.display = 'none';
-    bandejaEl.style.display = '';
-    say('');
-  }
-  editarBtn.addEventListener('click', function(){ if(!frozen) abrirBandeja(); });
+  function pintaQrs(estado, qrs, pend){ if (estado === 'confirmado') CelQR.pintar(qrs || [], pend); else CelQR.ocultar(); }
+  editarBtn.addEventListener('click', function(){
+    if (cerrado()) return;
+    CelQR.ocultar(); graciasEl.style.display = 'none'; bandejaEl.style.display = ''; say(''); pintarPersonas();
+  });
+  function anular(msg){ anulada = true; pasesDisp.style.display = 'none'; pintarEstado(); say(msg, ERR); }
 
-  function applyFreeze(){
-    if(!frozen) return;
-    btnYes.disabled = true;
-    btnNo.disabled  = true;
-    btnConf.disabled = true;
-    editarBtn.disabled = true;
-    fieldsEl.querySelectorAll('.rs-input').forEach(function(i){ i.disabled = true; });
-    btnMenos.disabled = true; btnMas.disabled = true;
-    btnText.textContent = 'Fecha límite alcanzada';
-    say('La fecha para confirmar asistencia ha pasado.');
-  }
-
-  function bloquear(msg){
-    btnYes.disabled = true; btnNo.disabled = true; btnConf.disabled = true;
-    say(msg, ERR);
-    applyFreeze();
-  }
-  var MSG_SIN_LINK = 'No encontramos tu invitación. Abre el enlace personalizado que te enviamos o pide a la familia de la quinceañera que te envíe tu enlace de nuevo.';
-
-  if(urlPara){
-    btnYes.disabled = true;
-    btnNo.disabled  = true;
-    fetch(PANEL_API + '?nombre=' + encodeURIComponent(urlPara) + '&url_boda=' + encodeURIComponent(RSVP_URL))
+  pintarEstado();
+  if (!para){
+    listo = true;
+    anular('Abre el enlace personalizado que te enviamos para confirmar tu asistencia.');
+  } else {
+    nameEl.textContent = para; nameEl.setAttribute('data-name', para); nameEl.style.display = 'block';
+    if (lblEl) lblEl.style.display = 'block';
+    fetch(API + '?nombre=' + encodeURIComponent(para) + '&url_boda=' + encodeURIComponent(URL_EVENTO))
       .then(function(r){ return r.json(); })
       .then(function(resp){
-        var d = resp && resp.invitado;
-        /* Si el panel no conoce el nombre no se deja confirmar (crearía una invitación suelta). */
-        if(resp && (resp.error === 'no_match' || (resp.ok && !d))){
-          bloquear('No encontramos tu invitación. Pide a la familia de la quinceañera que te envíe tu enlace de nuevo.');
-          return;
-        }
-        if(resp && resp.error === 'invitacion_borrada'){
-          bloquear('Esta invitación ya no está activa. Pide a la familia de la quinceañera que te envíe tu enlace de nuevo.');
-          return;
-        }
-        if(d && typeof d.pases === 'number' && d.pases > 0 && d.pases <= 20){ pasesAsignados = d.pases; }
-        /* Recuadro de menores solo si el panel los reporta */
-        if(d && typeof d.pases_menores === 'number' && d.pases_menores > 0){
-          menoresNum.textContent = d.pases_menores;
-          menoresBox.style.display = 'flex';
-        }
-        paintHeader();
-        if(!frozen){ btnYes.disabled = false; btnNo.disabled = false; }
-        if(d && (d.estado === 'confirmado' || d.estado === 'declino')){
-          if(d.nombres_confirmados && d.nombres_confirmados.length){ savedNames = d.nombres_confirmados.slice(); }
-          pasesAUsar = Math.min(pasesAsignados, Math.max(1, savedNames.length));
-          selectRsvp(d.estado === 'confirmado' ? 'yes' : 'no');
+        var boda = resp && resp.boda;
+        fijarFecha(boda ? boda.fecha_limite_rsvp : null, !!boda);
+        var inv = resp && resp.invitado;
+        /* Si el panel no la conoce (o la borraron) no se deja confirmar */
+        if (!inv){ anular('No encontramos tu invitación. Pide a la familia de la quinceañera que te envíe tu enlace de nuevo.'); return; }
+        asignados = (Array.isArray(inv.nombres_asignados) ? inv.nombres_asignados : [])
+          .map(function(n){ return String(n == null ? '' : n).trim(); }).filter(Boolean);
+        if (!asignados.length){ anular('Tu invitación aún no tiene lugares asignados. Contacta a la familia de la quinceañera.'); return; }
+        para = inv.nombre || para;
+        nameEl.textContent = para; nameEl.setAttribute('data-name', para);
+        pasesNumEl.textContent = asignados.length; pasesDisp.style.display = 'flex';
+        if (inv.mensaje && msgEl) msgEl.value = inv.mensaje;
+        choices = asignados.map(function(){ return ''; });
+        var respondio = inv.estado === 'confirmado' || inv.estado === 'declino', si = [];
+        if (respondio){
+          var conf = (inv.nombres_confirmados || []).map(clave);
+          asignados.forEach(function(nm, i){
+            if (inv.estado === 'declino') choices[i] = 'no';
+            else if (conf.indexOf(clave(nm)) >= 0){ choices[i] = 'si'; si.push(nm); }
+            /* Persona agregada o renombrada después de confirmar: queda por responder */
+          });
           btnText.textContent = 'Actualizar respuesta';
-          /* Con respuesta guardada la sección arranca CERRADA. */
-          mostrarGracias(d.estado, d.nombres_confirmados || []);
         }
-        applyFreeze();
+        pintarPersonas();
+        if (respondio){
+          mostrarGracias(inv.estado, si);
+          var qrs = resp.qrs || [];
+          pintaQrs(inv.estado, qrs, inv.estado === 'confirmado' && !qrs.length && !(boda && boda.qrs_generados_en));
+        }
+        pintarEstado();
+        if (frozen) say('La fecha para confirmar asistencia ha pasado.');
       })
-      .catch(function(){
-        if(!frozen){ btnYes.disabled = false; btnNo.disabled = false; }
-        applyFreeze();
-      });
-  } else {
-    /* Sin link personalizado no hay invitación que actualizar: se bloquea y se avisa. */
-    bloquear(MSG_SIN_LINK);
+      .catch(function(){ fijarFecha(null, false); pintarEstado(); say('No pudimos cargar tu invitación. Recarga la página.', ERR); });
   }
 
   btnConf.addEventListener('click', function(){
-    if(frozen || btnConf.disabled) return;
-    if(!rsvpChoice){ say('Por favor selecciona si asistirás o no.', ERR); return; }
-    var nombres = [];
-    if(rsvpChoice === 'yes'){
-      var inputs = fieldsEl.querySelectorAll('.rs-input');
-      for(var i = 0; i < inputs.length; i++){
-        var v = inputs[i].value.trim();
-        if(v) nombres.push(v);
-      }
-      if(nombres.length === 0){
-        say('Por favor escribe al menos un nombre.', ERR);
-        if(inputs[0]){ inputs[0].classList.add('rs-falta'); inputs[0].focus(); }
-        return;
-      }
-      /* Un nombre por campo: "Ana y Luis" en un campo descuadra el panel */
-      var doble = null;
-      for(var k = 0; k < inputs.length; k++){
-        var malo = /[&\/+,]|\s(y|and)\s/i.test(inputs[k].value.trim());
-        inputs[k].classList.toggle('rs-falta', malo);
-        if(malo && !doble) doble = inputs[k];
-      }
-      if(doble){
-        say('Escribe un solo nombre en cada campo. Si vienen más personas, sube el contador y escribe cada nombre en su propio campo.', ERR);
-        doble.focus();
-        return;
-      }
-      /* Eligió más pases de los nombres que escribió */
-      if(nombres.length < pasesAUsar){
-        var faltan = pasesAUsar - nombres.length, primero = null;
-        for(var j = 0; j < inputs.length; j++){
-          if(!inputs[j].value.trim()){ inputs[j].classList.add('rs-falta'); if(!primero) primero = inputs[j]; }
+    if (cerrado() || enviando || !asignados.length) return;
+    var faltan = 0;
+    personas.querySelectorAll('.rs-persona').forEach(function(c, i){ var f = !choices[i]; c.classList.toggle('rs-falta-card', f); if (f) faltan++; });
+    if (faltan){ say('Por favor responde por cada invitado (' + faltan + ' pendiente' + (faltan === 1 ? '' : 's') + ').', ERR); return; }
+    var si = asignados.filter(function(_, i){ return choices[i] === 'si'; });
+    var estado = si.length ? 'confirmado' : 'declino';
+    enviando = true; pintarEstado(); btnText.textContent = 'Enviando…'; say('');
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: para, url_boda: URL_EVENTO, estado: estado, pases_confirmados: si.length,
+        nombres_confirmados: si, mensaje: msgEl ? msgEl.value.trim() : '' }) })
+      .then(function(r){ return r.json().catch(function(){ return null; }).then(function(d){ return { ok: r.ok, d: d }; }); })
+      .then(function(res){
+        enviando = false;
+        if (res.ok && res.d && res.d.ok){
+          btnText.textContent = 'Actualizar respuesta'; pintarEstado();
+          mostrarGracias(estado, si);
+          pintaQrs(estado, res.d.qrs || [], !!res.d.qrs_pendientes);
+          if (estado === 'confirmado') confetti();
+          return;
         }
-        say('Elegiste ' + pasesAUsar + ' pases pero escribiste ' + nombres.length + ' nombre' + (nombres.length === 1 ? '' : 's') +
-            '. Escribe ' + (faltan === 1 ? 'el nombre que falta' : 'los ' + faltan + ' nombres que faltan') +
-            ' o baja el contador a los pases que vas a utilizar.', ERR);
-        if(primero) primero.focus();
-        return;
-      }
-    }
-    var estadoFinal = rsvpChoice === 'yes' ? 'confirmado' : 'declino';
-    btnText.textContent = 'Enviando…';
-    btnConf.disabled = true;
-    say('');
-
-    fetch(PANEL_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nombre:              urlPara,
-        url_boda:            RSVP_URL,
-        estado:              estadoFinal,
-        pases_confirmados:   estadoFinal === 'confirmado' ? nombres.length : 0,
-        nombres_confirmados: estadoFinal === 'confirmado' ? nombres : []
+        btnText.textContent = 'Confirmar asistencia';
+        var err = res.d && res.d.error;
+        if (err === 'rsvp_cerrado'){ frozen = true; pintarEstado(); say('La fecha para confirmar asistencia ha pasado.'); return; }
+        pintarEstado();
+        say(err === 'invitacion_no_disponible' ? 'No encontramos tu invitación. Pide a la familia de la quinceañera que te envíe tu enlace de nuevo.'
+          : 'Hubo un problema al enviar. Inténtalo de nuevo.', ERR);
       })
-    })
-    .then(function(r){ return r.json().then(function(d){ return { ok:r.ok, d:d }; }).catch(function(){ return { ok:r.ok, d:null }; }); })
-    .then(function(res){
-      btnConf.disabled = false;
-      /* Solo se da por guardado si el panel lo confirma. */
-      if(res.ok && res.d && res.d.ok){
-        btnText.textContent = 'Actualizar respuesta';
-        mostrarGracias(estadoFinal, nombres);
-        if(estadoFinal === 'confirmado') confetti();
-        return;
-      }
-      btnText.textContent = 'Confirmar asistencia';
-      var err = res.d && res.d.error;
-      say(
-        err === 'no_match'
-          ? 'No pudimos identificar tu invitación. Abre el enlace personalizado que te enviamos o pide a la familia de la quinceañera que te envíe tu enlace de nuevo.'
-          : err === 'invitacion_borrada'
-            ? 'Esta invitación ya no está activa. Pide a la familia de la quinceañera que te envíe tu enlace de nuevo.'
-            : 'Hubo un problema al enviar. Inténtalo de nuevo.',
-        ERR);
-    })
-    .catch(function(){
-      btnConf.disabled = false;
-      btnText.textContent = 'Confirmar asistencia';
-      say('Sin conexión. Verifica tu internet e inténtalo de nuevo.', ERR);
-    });
+      .catch(function(){ enviando = false; btnText.textContent = 'Confirmar asistencia'; pintarEstado(); say('Sin conexión. Verifica tu internet e inténtalo de nuevo.', ERR); });
   });
 })();
 
@@ -3290,6 +3251,85 @@ function initScrollReveal(){
   function sync(){b.setAttribute('aria-label',a.paused?'Reproducir música':'Pausar música');}
   a.addEventListener('play',sync);a.addEventListener('pause',sync);a.addEventListener('ended',sync);
   sync();
+})();
+</script>
+<script>window.ELY_LIMITE={"url": "https://xv-perla-issabela-osorio-soriano.vercel.app", "base": "2027-01-15", "tz": "America/Mexico_City", "viejas": [["15 de enero de 2027", "{d} de {mes} de {a}"], ["15 Enero 2027", "{d} {Mes} {a}"]]};</script>
+<script>
+/* ELYSIUM FECHA LÍMITE v1 — todos los textos de la fecha límite siguen la fecha
+   del panel Celestial: si la amplían desde el panel, la invitación la muestra sola.
+   Config en window.ELY_LIMITE = { url, base:'YYYY-MM-DD', tz, viejas:[[texto, plantilla], ...] } */
+(function(){
+  var C = window.ELY_LIMITE; if (!C || !window.fetch) return;
+  var ES_M = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var ES_MC = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var ES_D = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  var EN_M = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var EN_MC = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var EN_D = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function partes(t){
+    var o = {};
+    new Intl.DateTimeFormat('en-US', { timeZone: C.tz || 'America/Mexico_City', year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short' })
+      .formatToParts(new Date(t)).forEach(function(p){ o[p.type] = p.value; });
+    return { d: +o.day, m: +o.month - 1, a: +o.year, w: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(o.weekday) };
+  }
+  function th(n){ var v = n % 100; return n + ((v > 10 && v < 14) ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th')); }
+  function fmt(tpl, p){
+    var k = { d: p.d, dd: (p.d < 10 ? '0' : '') + p.d, m1: p.m + 1, mm: (p.m < 9 ? '0' : '') + (p.m + 1), mes: ES_M[p.m], Mes: ES_M[p.m].charAt(0).toUpperCase() + ES_M[p.m].slice(1), mesc: ES_MC[p.m],
+              a: p.a, dia: ES_D[p.w], month: EN_M[p.m], mon: EN_MC[p.m], weekday: EN_D[p.w], th: th(p.d) };
+    return tpl.replace(/\{(\w+)\}/g, function(_, x){ return k[x] != null ? k[x] : _; });
+  }
+  function esc(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  var reglas = [];
+  function aplicar(txt){
+    if (!txt || txt.length < 4) return txt;
+    for (var i = 0; i < reglas.length; i++){
+      var r = reglas[i];
+      txt = txt.replace(r.re, function(_, pre, hit){
+        var out = r.nuevo;
+        if (hit === hit.toUpperCase() && hit !== hit.toLowerCase()) out = out.toUpperCase();
+        else if (hit.charAt(0) !== hit.charAt(0).toLowerCase()) out = out.charAt(0).toUpperCase() + out.slice(1);
+        return pre + out;
+      });
+    }
+    return txt;
+  }
+  var ATTR = /^(data-|title$|aria-label$|alt$|placeholder$|content$)/;
+  function enElemento(el){
+    for (var i = 0; i < el.attributes.length; i++){
+      var at = el.attributes[i];
+      if (ATTR.test(at.name)){ var x = aplicar(at.value); if (x !== at.value) el.setAttribute(at.name, x); }
+    }
+  }
+  function recorrer(root){
+    if (root.nodeType === 3){ var v = aplicar(root.nodeValue); if (v !== root.nodeValue) root.nodeValue = v; return; }
+    if (root.nodeType !== 1) return;
+    if (/^(SCRIPT|STYLE)$/.test(root.tagName)) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())){ var y = aplicar(n.nodeValue); if (y !== n.nodeValue) n.nodeValue = y; }
+    enElemento(root);
+    var els = root.querySelectorAll('*');
+    for (var j = 0; j < els.length; j++) enElemento(els[j]);
+  }
+  fetch('https://panel-invitados-qr.vercel.app/api/confirmar?solo_boda=1&url_boda=' + encodeURIComponent(C.url))
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      var iso = j && j.boda && j.boda.fecha_limite_rsvp; if (!iso) return;
+      var p = partes(iso), b = C.base ? C.base.split('-') : null;
+      if (b && +b[0] === p.a && +b[1] === p.m + 1 && +b[2] === p.d) return;   // misma fecha: nada que cambiar
+      (C.viejas || []).forEach(function(v){
+        reglas.push({ re: new RegExp('(^|[^0-9A-Za-zÀ-ÿ])(' + esc(v[0]) + ')(?![0-9A-Za-zÀ-ÿ])', 'gi'), nuevo: fmt(v[1], p) });
+      });
+      recorrer(document.head); recorrer(document.body);
+      /* Textos que se pintan después (cambio de idioma, RSVP, etc.) */
+      new MutationObserver(function(ms){
+        ms.forEach(function(m){
+          if (m.type === 'characterData') recorrer(m.target);
+          else if (m.type === 'attributes') enElemento(m.target);
+          else m.addedNodes.forEach(recorrer);
+        });
+      }).observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-en', 'data-es', 'data-en-html', 'title', 'aria-label', 'placeholder'] });
+    })
+    .catch(function(){});
 })();
 </script>
 </body>
