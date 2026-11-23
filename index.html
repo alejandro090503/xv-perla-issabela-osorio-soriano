@@ -2312,7 +2312,20 @@ html,body{background:var(--bg);}
       </div>
 
       <div id="rs-bandeja">
-        <div class="rs-personas" id="rs-personas"></div>
+        <div class="rs-toggle">
+          <button class="rs-toggle-btn" id="rs-yes" type="button">Asistir&eacute;</button>
+          <button class="rs-toggle-btn" id="rs-no" type="button">No podr&eacute; asistir</button>
+        </div>
+        <div class="rs-contador-wrap" id="rs-contador-wrap">
+          <p class="rs-contador-nota" id="rs-contador-nota"></p>
+          <div class="rs-contador">
+            <button class="rs-contador-btn" id="rs-menos" type="button" aria-label="Quitar un pase">&minus;</button>
+            <span class="rs-contador-valor" id="rs-contador-valor" aria-live="polite">1</span>
+            <button class="rs-contador-btn" id="rs-mas" type="button" aria-label="Agregar un pase">+</button>
+          </div>
+          <p class="rs-contador-pie" id="rs-contador-pie"></p>
+        </div>
+        <div class="rs-fields" id="rs-fields" style="display:none"></div>
         <div class="rs-trans-msg"><div class="cel-msg" id="celMsgWrap"><label for="celMensaje">Mensaje para Perla <small>(opcional)</small></label><textarea id="celMensaje" maxlength="1000" placeholder="Escríbele unas palabras a la quinceañera…"></textarea></div></div>
         <button class="rs-btn" id="rs-confirm-btn" type="button">
           <span id="rs-btn-text">Confirmar Asistencia</span>
@@ -3074,7 +3087,7 @@ window.CelQR=(function(){
     });
   }
 })();
-/* ── RSVP · Panel Celestial / QR (nombres asignados: una tarjeta por persona) ── */
+/* ── RSVP · Panel Celestial / QR (versión X pases, con contador) ── */
 (function(){
   var API = 'https://panel-invitados-qr.vercel.app/api/confirmar';
   var URL_EVENTO = 'https://xv-perla-issabela-osorio-soriano.vercel.app';
@@ -3084,30 +3097,33 @@ window.CelQR=(function(){
   var ERR = '#a3311f';
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ?i= token base64url "nombre|pases|menores"; también ?para= */
+  /* ?i= token base64url "nombre|pases|menores"; también ?para=&pases= */
   function decodeInvite(tok){
     try {
       var b64 = tok.replace(/-/g, '+').replace(/_/g, '/');
       while (b64.length % 4) b64 += '=';
       var bin = atob(b64), bytes = new Uint8Array(bin.length);
       for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-      return (new TextDecoder().decode(bytes).split('|')[0] || '').trim();
-    } catch (e) { return ''; }
+      var p = new TextDecoder().decode(bytes).split('|');
+      return { para: (p[0] || '').trim(), pases: (parseInt(p[1], 10) || 1) + (parseInt(p[2], 10) || 0) };
+    } catch (e) { return null; }
   }
-  function clave(x){ return String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
   var qp = new URLSearchParams(location.search), hp = new URLSearchParams(location.hash.replace(/^#/, ''));
-  var tok = qp.get('i') || hp.get('i');
-  var para = tok ? decodeInvite(tok) : '';
-  if (!para) para = (qp.get('para') || hp.get('para') || '').trim();
+  var para = '', rawP = 1, tok = qp.get('i') || hp.get('i');
+  if (tok){ var dec = decodeInvite(tok); if (dec && dec.para){ para = dec.para; rawP = dec.pases; } }
+  if (!para){ para = (qp.get('para') || hp.get('para') || '').trim(); rawP = parseInt(qp.get('pases') || hp.get('pases'), 10); }
+  var pasesAsignados = (isNaN(rawP) || rawP < 1 || rawP > 30) ? 1 : rawP;
+  var pasesAUsar = 1;
 
   var frozen = false, listo = false, anulada = false, enviando = false;
-  var asignados = [], choices = [];
+  var rsvpChoice = null, savedNames = [];
   function $(id){ return document.getElementById(id); }
   var nameEl = $('rs-guest'), lblEl = $('rs-guest-lbl'), pasesNumEl = $('rs-pases-num'), pasesDisp = $('rs-pases');
-  var personas = $('rs-personas'), bandejaEl = $('rs-bandeja'), graciasEl = $('rs-gracias');
+  var fieldsEl = $('rs-fields'), bandejaEl = $('rs-bandeja'), graciasEl = $('rs-gracias');
   var gTitleEl = $('rs-gracias-title'), gSubEl = $('rs-gracias-sub'), editarBtn = $('rs-editar-btn');
-  var btnConf = $('rs-confirm-btn'), btnText = $('rs-btn-text'), feedEl = $('rs-feedback'), msgEl = $('celMensaje');
-  if (!btnConf || !personas) return;
+  var btnYes = $('rs-yes'), btnNo = $('rs-no'), btnConf = $('rs-confirm-btn'), btnText = $('rs-btn-text'), feedEl = $('rs-feedback'), msgEl = $('celMensaje');
+  var contWrap = $('rs-contador-wrap'), contNota = $('rs-contador-nota'), contValor = $('rs-contador-valor'), contPie = $('rs-contador-pie'), btnMenos = $('rs-menos'), btnMas = $('rs-mas');
+  if (!btnConf || !btnYes) return;
 
   function cerrado(){ return frozen || !listo || anulada; }
   function say(msg, color){
@@ -3120,32 +3136,67 @@ window.CelQR=(function(){
     frozen = lim !== null && Date.now() > lim;
     listo = true;
   }
+  function paintHeader(){
+    pasesNumEl.textContent = pasesAsignados;
+    if (para){
+      pasesDisp.style.display = 'flex';
+      nameEl.textContent = para; nameEl.setAttribute('data-name', para); nameEl.style.display = 'block';
+      if (lblEl) lblEl.style.display = 'block';
+    }
+  }
+  function pintaContador(){
+    var ver = rsvpChoice === 'yes' && pasesAsignados > 1;
+    contWrap.style.display = ver ? 'block' : 'none';
+    if (!ver) return;
+    contValor.textContent = pasesAUsar;
+    contNota.textContent = 'Tienes ' + pasesAsignados + ' pases reservados. Confirma el nombre y número de pases que vayas a ocupar.';
+    contPie.textContent = pasesAUsar >= pasesAsignados ? 'Usarás todos tus pases' : pasesAUsar + ' de ' + pasesAsignados + ' pases';
+    btnMenos.disabled = cerrado() || pasesAUsar <= 1;
+    btnMas.disabled = cerrado() || pasesAUsar >= pasesAsignados;
+  }
   function pintarEstado(){
     var off = cerrado();
-    btnConf.disabled = off || enviando || !asignados.length;
+    btnYes.disabled = btnNo.disabled = off;
+    btnConf.disabled = off || enviando;
     editarBtn.disabled = frozen;
     if (msgEl) msgEl.disabled = off;
-    personas.querySelectorAll('button').forEach(function(b){ b.disabled = off; });
+    fieldsEl.querySelectorAll('input').forEach(function(i){ i.disabled = off; });
     if (frozen) btnText.textContent = 'Fecha límite alcanzada';
+    pintaContador();
   }
-  function pintarPersonas(){
-    personas.innerHTML = '';
-    asignados.forEach(function(nm, i){
-      var card = document.createElement('div'); card.className = 'rs-persona';
-      var p = document.createElement('p'); p.className = 'rs-persona-nombre'; p.textContent = nm;
-      var t = document.createElement('div'); t.className = 'rs-persona-btns';
-      [['si', 'Asistirá'], ['no', 'No asistirá']].forEach(function(o){
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'rs-va'; b.textContent = o[1];
-        var on = choices[i] === o[0];
-        if (on) b.classList.add('on-' + o[0]);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-        b.addEventListener('click', function(){ if (cerrado()) return; choices[i] = o[0]; say(''); pintarPersonas(); });
-        t.appendChild(b);
-      });
-      card.appendChild(p); card.appendChild(t); personas.appendChild(card);
-    });
-    pintarEstado();
+  function guardarEscritos(){ fieldsEl.querySelectorAll('.rs-input').forEach(function(inp, i){ savedNames[i] = inp.value; }); }
+  /* Un campo por cada pase que VA A USAR */
+  function renderFields(){
+    guardarEscritos();
+    fieldsEl.innerHTML = '';
+    for (var i = 0; i < pasesAUsar; i++){
+      var inp = document.createElement('input');
+      inp.type = 'text'; inp.className = 'rs-input';
+      inp.placeholder = pasesAUsar === 1 ? 'Tu nombre completo' : 'Nombre completo del invitado ' + (i + 1);
+      inp.setAttribute('aria-label', inp.placeholder);
+      inp.autocomplete = 'off'; inp.maxLength = 60; inp.disabled = cerrado(); inp.value = savedNames[i] || '';
+      (function(idx){ inp.addEventListener('input', function(){ savedNames[idx] = this.value; this.classList.remove('rs-falta'); }); })(i);
+      fieldsEl.appendChild(inp);
+    }
   }
+  function setPases(n){
+    if (cerrado()) return;
+    n = Math.max(1, Math.min(pasesAsignados, n)); if (n === pasesAUsar) return;
+    guardarEscritos(); pasesAUsar = n; renderFields(); pintaContador(); say('');
+  }
+  btnMenos.addEventListener('click', function(){ setPases(pasesAUsar - 1); });
+  btnMas.addEventListener('click', function(){ setPases(pasesAUsar + 1); });
+
+  function selectRsvp(choice){
+    rsvpChoice = choice;
+    btnYes.classList.toggle('rs-sel-yes', choice === 'yes');
+    btnNo.classList.toggle('rs-sel-no', choice === 'no');
+    if (choice === 'yes'){ renderFields(); fieldsEl.style.display = 'flex'; }
+    else { guardarEscritos(); fieldsEl.style.display = 'none'; }
+    pintaContador();
+  }
+  btnYes.addEventListener('click', function(){ if (!cerrado()){ selectRsvp('yes'); say(''); } });
+  btnNo.addEventListener('click', function(){ if (!cerrado()){ selectRsvp('no'); say(''); } });
 
   function confetti(){
     if (RM || !window.gsap) return;
@@ -3166,12 +3217,13 @@ window.CelQR=(function(){
   }
 
   function mostrarGracias(estado, nombres){
+    var lista = (nombres || []).filter(function(n){ return n && String(n).trim(); });
     if (estado === 'confirmado'){
       gTitleEl.textContent = '¡Gracias por confirmar!';
-      gSubEl.textContent = nombres.length === 1 ? 'Te espero, ' + nombres[0] + '.' : 'Confirmamos ' + nombres.length + ' lugares: ' + nombres.join(', ') + '.';
+      gSubEl.textContent = lista.length === 1 ? 'Te espero, ' + lista[0] + '.' : 'Confirmamos ' + lista.length + ' lugares: ' + lista.join(', ') + '.';
     } else {
       gTitleEl.textContent = 'Gracias por avisarme';
-      gSubEl.textContent = 'Lamento que no puedan acompañarme. Los voy a extrañar.';
+      gSubEl.textContent = 'Lamento que no puedas acompañarme. Te voy a extrañar.';
     }
     bandejaEl.style.display = 'none'; graciasEl.style.display = '';
     editarBtn.disabled = frozen; say('');
@@ -3179,17 +3231,15 @@ window.CelQR=(function(){
   function pintaQrs(estado, qrs, pend){ if (estado === 'confirmado') CelQR.pintar(qrs || [], pend); else CelQR.ocultar(); }
   editarBtn.addEventListener('click', function(){
     if (cerrado()) return;
-    CelQR.ocultar(); graciasEl.style.display = 'none'; bandejaEl.style.display = ''; say(''); pintarPersonas();
+    CelQR.ocultar(); graciasEl.style.display = 'none'; bandejaEl.style.display = ''; say('');
   });
   function anular(msg){ anulada = true; pasesDisp.style.display = 'none'; pintarEstado(); say(msg, ERR); }
 
-  pintarEstado();
+  paintHeader(); pintarEstado();
   if (!para){
     listo = true;
     anular('Abre el enlace personalizado que te enviamos para confirmar tu asistencia.');
   } else {
-    nameEl.textContent = para; nameEl.setAttribute('data-name', para); nameEl.style.display = 'block';
-    if (lblEl) lblEl.style.display = 'block';
     fetch(API + '?nombre=' + encodeURIComponent(para) + '&url_boda=' + encodeURIComponent(URL_EVENTO))
       .then(function(r){ return r.json(); })
       .then(function(resp){
@@ -3198,26 +3248,17 @@ window.CelQR=(function(){
         var inv = resp && resp.invitado;
         /* Si el panel no la conoce (o la borraron) no se deja confirmar */
         if (!inv){ anular('No encontramos tu invitación. Pide a la familia de la quinceañera que te envíe tu enlace de nuevo.'); return; }
-        asignados = (Array.isArray(inv.nombres_asignados) ? inv.nombres_asignados : [])
-          .map(function(n){ return String(n == null ? '' : n).trim(); }).filter(Boolean);
-        if (!asignados.length){ anular('Tu invitación aún no tiene lugares asignados. Contacta a la familia de la quinceañera.'); return; }
         para = inv.nombre || para;
-        nameEl.textContent = para; nameEl.setAttribute('data-name', para);
-        pasesNumEl.textContent = asignados.length; pasesDisp.style.display = 'flex';
+        if (typeof inv.pases === 'number' && inv.pases > 0) pasesAsignados = Math.min(30, inv.pases + (inv.pases_menores || 0));
+        if (pasesAUsar > pasesAsignados) pasesAUsar = pasesAsignados;
+        paintHeader();
         if (inv.mensaje && msgEl) msgEl.value = inv.mensaje;
-        choices = asignados.map(function(){ return ''; });
-        var respondio = inv.estado === 'confirmado' || inv.estado === 'declino', si = [];
-        if (respondio){
-          var conf = (inv.nombres_confirmados || []).map(clave);
-          asignados.forEach(function(nm, i){
-            if (inv.estado === 'confirmado' && conf.indexOf(clave(nm)) >= 0){ choices[i] = 'si'; si.push(nm); }
-            else choices[i] = 'no';
-          });
+        if (inv.estado === 'confirmado' || inv.estado === 'declino'){
+          savedNames = (inv.nombres_confirmados || []).slice();
+          pasesAUsar = Math.min(pasesAsignados, Math.max(1, savedNames.length));
+          selectRsvp(inv.estado === 'confirmado' ? 'yes' : 'no');
           btnText.textContent = 'Actualizar respuesta';
-        }
-        pintarPersonas();
-        if (respondio){
-          mostrarGracias(inv.estado, si);
+          mostrarGracias(inv.estado, inv.nombres_confirmados || []);
           var qrs = resp.qrs || [];
           pintaQrs(inv.estado, qrs, inv.estado === 'confirmado' && !qrs.length && !(boda && boda.qrs_generados_en));
         }
@@ -3228,22 +3269,39 @@ window.CelQR=(function(){
   }
 
   btnConf.addEventListener('click', function(){
-    if (cerrado() || enviando || !asignados.length) return;
-    var faltan = 0;
-    personas.querySelectorAll('.rs-persona').forEach(function(c, i){ var f = !choices[i]; c.classList.toggle('rs-falta-card', f); if (f) faltan++; });
-    if (faltan){ say('Por favor responde por cada invitado (' + faltan + ' pendiente' + (faltan === 1 ? '' : 's') + ').', ERR); return; }
-    var si = asignados.filter(function(_, i){ return choices[i] === 'si'; });
-    var estado = si.length ? 'confirmado' : 'declino';
+    if (cerrado() || enviando) return;
+    if (!rsvpChoice){ say('Por favor selecciona si asistirás o no.', ERR); return; }
+    var nombres = [];
+    if (rsvpChoice === 'yes'){
+      var inputs = fieldsEl.querySelectorAll('.rs-input');
+      inputs.forEach(function(inp){ var v = inp.value.trim(); if (v) nombres.push(v); });
+      if (!nombres.length){ if (inputs[0]){ inputs[0].classList.add('rs-falta'); inputs[0].focus(); } say('Por favor escribe al menos un nombre.', ERR); return; }
+      /* Un nombre por campo: "Ana y Luis" en un campo descuadra el panel */
+      var doble = null;
+      inputs.forEach(function(inp){ var malo = /[&\/+,]|\s(y|and)\s/i.test(inp.value.trim()); inp.classList.toggle('rs-falta', malo); if (malo && !doble) doble = inp; });
+      if (doble){ doble.focus(); say('Escribe un solo nombre en cada campo. Si vienen más personas, sube el contador y escribe cada nombre en su propio campo.', ERR); return; }
+      if (nombres.length < pasesAUsar){
+        var faltan = pasesAUsar - nombres.length, primero = null;
+        inputs.forEach(function(inp){ var vacio = !inp.value.trim(); inp.classList.toggle('rs-falta', vacio); if (vacio && !primero) primero = inp; });
+        say('Elegiste ' + pasesAUsar + ' pases pero escribiste ' + nombres.length + ' nombre' + (nombres.length === 1 ? '' : 's') +
+            '. Escribe ' + (faltan === 1 ? 'el nombre que falta' : 'los ' + faltan + ' nombres que faltan') + ' o baja el contador a los pases que vas a utilizar.', ERR);
+        if (primero) primero.focus();
+        return;
+      }
+    }
+    var estado = rsvpChoice === 'yes' ? 'confirmado' : 'declino';
     enviando = true; pintarEstado(); btnText.textContent = 'Enviando…'; say('');
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: para, url_boda: URL_EVENTO, estado: estado, pases_confirmados: si.length,
-        nombres_confirmados: si, mensaje: msgEl ? msgEl.value.trim() : '' }) })
+      body: JSON.stringify({ nombre: para, url_boda: URL_EVENTO, estado: estado,
+        pases_confirmados: estado === 'confirmado' ? nombres.length : 0, nombres_confirmados: nombres,
+        mensaje: msgEl ? msgEl.value.trim() : '' }) })
       .then(function(r){ return r.json().catch(function(){ return null; }).then(function(d){ return { ok: r.ok, d: d }; }); })
       .then(function(res){
         enviando = false;
         if (res.ok && res.d && res.d.ok){
           btnText.textContent = 'Actualizar respuesta'; pintarEstado();
-          mostrarGracias(estado, si);
+          savedNames = nombres.slice();
+          mostrarGracias(estado, nombres);
           pintaQrs(estado, res.d.qrs || [], !!res.d.qrs_pendientes);
           if (estado === 'confirmado') confetti();
           return;
