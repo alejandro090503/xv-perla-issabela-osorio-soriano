@@ -3,6 +3,6 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "redirects": [
-    { "source": "/album", "destination": "https://panel-invitados.vercel.app/subir/xv-perla-issabela-osorio-soriano", "permanent": false }
+    { "source": "/album", "destination": "https://panel-invitados-qr.vercel.app/subir/xv-perla-issabela-osorio-soriano", "permanent": false }
   ]
 }
